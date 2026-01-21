@@ -22,7 +22,7 @@ const state = {
 
 // Configuration
 const CONFIG = {
-    TOTAL_QUESTIONS: 7,
+    TOTAL_QUESTIONS: 10,
     API_BASE_URL: ""
 };
 
@@ -506,9 +506,12 @@ function displayEvaluationResults(evaluation) {
     const categories = [
         'Introduction',
         'Clinical Judgement',
+        'Technical Knowledge - Clinical Procedures',
         'Ethics, Consent & Communication',
         'Productivity & Efficiency',
+        'Technical Knowledge - Diagnosis & Treatment Planning',
         'Mentorship & Independence',
+        "Technical Knowledge - Diagnosis & Treatment Planning",
         'Fit & Professional Maturity',
         'Insight & Authenticity'
     ];

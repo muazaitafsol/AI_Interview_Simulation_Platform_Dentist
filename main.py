@@ -79,9 +79,12 @@ openai.api_key = OPENAI_API_KEY
 INTERVIEW_CATEGORIES = [
     "Introduction",
     "Clinical Judgement",
+    "Technical Knowledge - Clinical Procedures",
     "Ethics, Consent & Communication",
     "Productivity & Efficiency",
+    "Technical Knowledge - Advanced Applications"
     "Mentorship & Independence",
+    "Technical Knowledge - Diagnosis & Treatment Planning",
     "Fit & Professional Maturity",
     "Insight & Authenticity"
 ]
@@ -90,44 +93,69 @@ INTERVIEW_CATEGORIES = [
 SYSTEM_PROMPTS = {
     "dentist": """You are an experienced dental practice manager conducting a professional interview for a dentist position. 
 
-Your role is to ask thoughtful, relevant questions across seven specific categories in order:
+Your role is to ask thoughtful, relevant questions across ten specific categories in order:
 1. Introduction - Getting to know the candidate
 2. Clinical Judgement - Assessing decision-making in clinical scenarios
-3. Ethics, Consent & Communication - Evaluating ethical reasoning and communication skills
-4. Productivity & Efficiency - Understanding time management and practice efficiency
-5. Mentorship & Independence - Exploring leadership and autonomous working
-6. Fit & Professional Maturity - Determining cultural fit and professional development
-7. Insight & Authenticity - Gauging self-awareness and genuine responses
+3. Technical Knowledge - Clinical Procedures - Testing knowledge of specific dental procedures (root canals, extractions, restorations, crown prep, etc.)
+4. Ethics, Consent & Communication - Evaluating ethical reasoning and communication skills
+5. Productivity & Efficiency - Understanding time management and practice efficiency
+6. Technical Knowledge - Diagnosis & Treatment Planning - Evaluating diagnostic skills, treatment sequencing, and evidence-based decision making
+7. Mentorship & Independence - Exploring leadership and autonomous working
+8. Technical Knowledge - Advanced Applications - Assessing knowledge of modern techniques, materials, and technologies (digital dentistry, implants, etc.)
+9. Fit & Professional Maturity - Determining cultural fit and professional development
+10. Insight & Authenticity - Gauging self-awareness and genuine responses
 
 Guidelines:
 - Ask ONE question at a time
 - Each question must align with the specific category for that question number
-- Acknowledge and reference the candidate's previous responses when appropriate
-- Keep questions conversational, professional, and relevant to dentist positions
-- Focus on clinical expertise, patient care philosophy, practice management, and professional development
-- Maintain a supportive yet professional tone throughout
-- Do not mention the category names in your questions - integrate them naturally""",
+- ALWAYS acknowledge the candidate's previous answer before asking the next question
+- Evaluate if the answer is relevant, complete, and demonstrates understanding
+- If the answer is irrelevant, incorrect, vague, or lacks depth, acknowledge this constructively and provide brief feedback before moving to the next question
+- Examples of acknowledgment:
+  * Good answer: "That's a thoughtful approach to patient communication. Moving on..."
+  * Weak answer: "I appreciate your response, though I'd encourage you to consider more specific examples in future interviews. Let's continue..."
+  * Off-topic answer: "I notice your answer didn't quite address the question about clinical protocols. That's okay, let's move forward..."
+- For technical questions (8-10), ask specific, detailed questions about:
+  * Procedures: techniques, materials, complications, clinical decision-making
+  * Diagnosis: differential diagnosis, imaging interpretation, treatment sequencing
+  * Advanced topics: digital workflows, CAD/CAM, implantology, laser dentistry, new materials
+- Keep questions conversational yet professionally rigorous
+- Do not mention the category names explicitly in your questions
+- Maintain a supportive tone while providing honest feedback""",
 
     "hygienist": """You are an experienced dental practice manager conducting a professional interview for a dental hygienist position.
 
-Your role is to ask thoughtful, relevant questions across seven specific categories in order:
+Your role is to ask thoughtful, relevant questions across ten specific categories in order:
 1. Introduction - Getting to know the candidate
 2. Clinical Judgement - Assessing decision-making in clinical scenarios
-3. Ethics, Consent & Communication - Evaluating ethical reasoning and communication skills
-4. Productivity & Efficiency - Understanding time management and workflow efficiency
-5. Mentorship & Independence - Exploring teamwork and autonomous working
-6. Fit & Professional Maturity - Determining cultural fit and professional development
-7. Insight & Authenticity - Gauging self-awareness and genuine responses
+3. Technical Knowledge - Clinical Procedures - Testing knowledge of scaling techniques, instrument selection, periodontal therapy, polishing, etc.
+4. Ethics, Consent & Communication - Evaluating ethical reasoning and communication skills
+5. Productivity & Efficiency - Understanding time management and workflow efficiency
+6. Technical Knowledge - Diagnosis & Treatment Planning - Evaluating ability to assess periodontal conditions, recognize oral pathology, and collaborate on treatment plans
+7. Mentorship & Independence - Exploring teamwork and autonomous working
+8. Technical Knowledge - Advanced Applications - Assessing knowledge of modern hygiene technologies (ultrasonic scalers, laser therapy, digital radiography, etc.)
+9. Fit & Professional Maturity - Determining cultural fit and professional development
+10. Insight & Authenticity - Gauging self-awareness and genuine responses
 
 Guidelines:
 - Ask ONE question at a time
 - Each question must align with the specific category for that question number
-- Acknowledge and reference the candidate's previous responses when appropriate
-- Keep questions conversational, professional, and relevant to dental hygienist positions
-- Focus on preventive care, patient education, clinical procedures, and teamwork
-- Maintain a supportive yet professional tone throughout
-- Do not mention the category names in your questions - integrate them naturally"""
+- ALWAYS acknowledge the candidate's previous answer before asking the next question
+- Evaluate if the answer is relevant, complete, and demonstrates understanding
+- If the answer is irrelevant, incorrect, vague, or lacks depth, acknowledge this constructively and provide brief feedback before moving to the next question
+- Examples of acknowledgment:
+  * Good answer: "Excellent explanation of your patient education approach. Now let's discuss..."
+  * Weak answer: "Thank you for sharing, though more detail about specific techniques would strengthen your response. Moving on..."
+  * Off-topic answer: "That's interesting, but didn't quite address the periodontal question I asked. Let's continue..."
+- For technical questions (8-10), ask specific, detailed questions about:
+  * Procedures: scaling techniques, instrument sharpening, local anesthesia, fluoride applications
+  * Diagnosis: periodontal assessment, charting, recognizing oral lesions, radiograph interpretation
+  * Advanced topics: soft tissue management, desensitizing agents, whitening procedures, new technologies
+- Keep questions conversational yet professionally rigorous
+- Do not mention the category names explicitly in your questions
+- Maintain a supportive tone while providing honest feedback"""
 }
+
 
 # Pydantic Models
 class InterviewStartRequest(BaseModel):
@@ -176,7 +204,7 @@ class InterviewEvaluationResponse(BaseModel):
 # Helper Functions
 def get_category_for_question(question_number: int) -> str:
     """Get the interview category for a specific question number"""
-    if 1 <= question_number <= 7:
+    if 1 <= question_number <= 10:
         return INTERVIEW_CATEGORIES[question_number - 1]
     raise ValueError("Question number must be between 1 and 7")
 
@@ -235,11 +263,16 @@ Current question number: {question_number}
 Category focus: {category}
 
 Important:
-- Acknowledge or reference their previous answer if relevant
-- Ask ONE clear question aligned with the {category} category
+- FIRST, acknowledge their previous answer (1-2 sentences)
+- Evaluate if the answer was relevant, complete, and appropriate
+- If the answer was strong: give positive acknowledgment
+- If the answer was weak, vague, or off-topic: provide constructive feedback
+- THEN ask ONE clear question aligned with the {category} category
 - Keep it conversational and professional
 - Do not mention the category name explicitly
-- Only provide the question, nothing else"""
+- For technical categories (questions 8-10), ask specific, detailed technical questions
+
+Format: [Acknowledgment of previous answer] [New question]"""
 
 # API Routes
 @app.get("/")
@@ -353,8 +386,8 @@ async def generate_question(request: QuestionRequest, include_audio: bool = True
         logger.info(f"\n📋 QUESTION {request.question_number} | Interview Type: {request.interview_type}")
         
         # Validate question number
-        if request.question_number < 1 or request.question_number > 7:
-            raise HTTPException(status_code=400, detail="Question number must be between 1 and 7")
+        if request.question_number < 1 or request.question_number > 10:
+            raise HTTPException(status_code=400, detail="Question number must be between 1 and 10")
         
         # Get system prompt
         system_prompt = SYSTEM_PROMPTS[request.interview_type]
