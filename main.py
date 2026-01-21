@@ -82,7 +82,7 @@ INTERVIEW_CATEGORIES = [
     "Technical Knowledge - Clinical Procedures",
     "Ethics, Consent & Communication",
     "Productivity & Efficiency",
-    "Technical Knowledge - Advanced Applications"
+    "Technical Knowledge - Advanced Applications",
     "Mentorship & Independence",
     "Technical Knowledge - Diagnosis & Treatment Planning",
     "Fit & Professional Maturity",
@@ -206,7 +206,7 @@ def get_category_for_question(question_number: int) -> str:
     """Get the interview category for a specific question number"""
     if 1 <= question_number <= 10:
         return INTERVIEW_CATEGORIES[question_number - 1]
-    raise ValueError("Question number must be between 1 and 7")
+    raise ValueError("Question number must be between 1 and 10")
 
 async def generate_audio_from_text(text: str) -> str:
     """

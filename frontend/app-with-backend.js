@@ -509,9 +509,9 @@ function displayEvaluationResults(evaluation) {
         'Technical Knowledge - Clinical Procedures',
         'Ethics, Consent & Communication',
         'Productivity & Efficiency',
-        'Technical Knowledge - Diagnosis & Treatment Planning',
+        'Technical Knowledge - Advanced Applications',
         'Mentorship & Independence',
-        "Technical Knowledge - Diagnosis & Treatment Planning",
+        'Technical Knowledge - Diagnosis & Treatment Planning',
         'Fit & Professional Maturity',
         'Insight & Authenticity'
     ];
