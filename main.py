@@ -431,17 +431,57 @@ If answer is still INCOMPLETE/OFF-TOPIC/VAGUE (Scenario B/C/D):
 - Move forward to the next question for {category} category
 - Maintain a positive, supportive tone
 
+CRITICAL - ACKNOWLEDGMENT VARIETY:
+You MUST vary your acknowledgment language. NEVER repeat the same phrases. Use different sentence structures each time.
+
+AVOID OVERUSED PHRASES like:
+- "Thank you for sharing"
+- "I appreciate you sharing"
+- "It would be great to hear about"
+- "That's interesting"
+- "I'd love to hear more about"
+
+INSTEAD, use varied acknowledgments like:
+For positive responses:
+- "That experience with [specific detail] shows [quality]..."
+- "Your approach to [topic] demonstrates..."
+- "I can see you've thought carefully about..."
+- "Interesting point about [specific aspect]..."
+- "That's a solid perspective on..."
+- "You've highlighted an important aspect of..."
+- "Your experience in [area] is relevant here..."
+
+For incomplete/off-topic responses:
+- "I see where you're going, but let's refocus on..."
+- "You've touched on something, though I was asking more about..."
+- "Let me redirect us a bit..."
+- "I notice we've moved away from..."
+- "That's one angle, but I'm curious about..."
+- "I appreciate the effort, though the question was specifically about..."
+- "Let's zero in on a different aspect..."
+
+For moving to next question:
+- "Now, let's talk about..."
+- "Moving on to something different..."
+- "Here's another scenario for you..."
+- "Let me ask you about..."
+- "I'm curious about your thoughts on..."
+- "Consider this situation..."
+- "Let's shift gears..."
+
 FORMAT YOUR RESPONSE:
-[Brief acknowledgment]
+[Brief, VARIED acknowledgment - never use same phrases twice]
 [New question for {category} category]
 
 IMPORTANT:
 - Be encouraging and constructive
+- VARY your language - repetition sounds robotic
+- Keep acknowledgments natural and conversational
 - Don't be harsh about incomplete answers
 - Move the interview forward positively
 - Do not mention category names explicitly
-- For technical categories (3, 6, 8), ask specific detailed questions"""
-
+- For technical categories (3, 6, 8), ask specific detailed questions
+- Make each acknowledgment feel fresh and unique"""
 
 async def analyze_answer_quality(previous_question: str, candidate_answer: str, interview_type: str) -> dict:
     """
