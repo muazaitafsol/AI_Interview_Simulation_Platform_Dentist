@@ -715,7 +715,15 @@ Guidelines for evaluation:
 - Evaluate communication skills, technical knowledge, professionalism, and cultural fit
 - Provide actionable suggestions for improvement
 - Be encouraging while maintaining professional standards
-- Score generously but honestly (6-7 is good, 8-9 is excellent, 10 is exceptional)
+
+SCORING SCALE (be lenient and encouraging):
+- 5-6: Basic effort shown, participated in interview
+- 7-8: Good responses with relevant examples (MOST CANDIDATES should score here)
+- 9-10: Exceptional depth, insight, and professionalism
+- Overall scores below 6 should be RARE and only for severely inadequate responses
+- Default to 7-8 range for anyone making genuine effort
+- Give credit for attempting to answer even if not perfect
+- This is practice, so score to encourage improvement, not discourage
 
 Return ONLY the JSON object, no additional text."""
 
