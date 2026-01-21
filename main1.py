@@ -375,7 +375,7 @@ async def generate_audio_from_text(text: str) -> str:
         logger.error(f"Error generating audio: {str(e)}")
         return None
 
-def create_question_prompt(question_number: int, user_name: str, is_first: bool = False, previous_question: str = None, is_rephrase: bool = False, scenario: str = None) -> str:
+def create_question_prompt(question_number: int, user_name: str, is_first: bool = False, previous_question: str = None) -> str:
     """Create a prompt for question generation based on category with answer analysis"""
     category = get_category_for_question(question_number)
     
@@ -386,61 +386,50 @@ Category focus: {category}
 
 Keep it conversational and welcoming. Only provide the greeting and question, nothing else."""
     
-    # If this is a rephrase after incomplete/off-topic/vague answer
-    if is_rephrase:
-        scenario_messages = {
-            "B": "I appreciate you sharing that, but I noticed you didn't fully address all aspects of the question.",
-            "C": "I notice we went in a different direction than what I was asking about.",
-            "D": "Thank you for that response, but I'd like you to be more specific with concrete examples."
-        }
-        
-        acknowledgment = scenario_messages.get(scenario, "Let me rephrase the question.")
-        
-        return f"""The candidate gave an incomplete/off-topic/vague answer to the previous question.
-
-Previous question: {previous_question}
-Scenario: {scenario}
-
-Your task:
-1. Start with this acknowledgment: "{acknowledgment}"
-2. Rephrase the SAME question ({category} category) in a clearer, more direct way
-3. Emphasize what specific information you're looking for
-4. Keep it conversational and supportive
-
-Do NOT ask the next category question yet. Stay on the same topic but make it clearer what you're asking for.
-
-Format: [Acknowledgment] [Rephrased question with clearer guidance]"""
-    
-    # Regular flow - complete answer or second attempt after rephrase
-    return f"""You are conducting an interview. Based on the candidate's response, determine what to do next.
+    return f"""You are conducting an interview. Your task is to:
+1. ANALYZE the candidate's previous response carefully
+2. Determine if they answered the question appropriately
+3. Provide feedback and ask the next question accordingly
 
 Previous question asked: {previous_question}
 
 Current question number: {question_number}
 Category focus: {category}
 
-ANALYZE the candidate's previous response:
+RESPONSE ANALYSIS - Choose ONE scenario:
 
-If answer is COMPLETE (Scenario A):
-- Give brief positive acknowledgment (1-2 sentences)
-- Move to the next question for {category} category
+SCENARIO A: Complete and Relevant Answer
+- The candidate answered the question fully and appropriately
+- Their response was on-topic and addressed what was asked
+- Action: Give brief positive acknowledgment (1-2 sentences) → Ask the next question for {category}
 
-If answer is still INCOMPLETE/OFF-TOPIC/VAGUE (Scenario B/C/D):
-- Give encouraging acknowledgment of their effort (1 sentence)
-- Briefly note what was missing but don't dwell on it
-- Move forward to the next question for {category} category
-- Maintain a positive, supportive tone
+SCENARIO B: Incomplete Answer
+- The candidate partially answered but missed key aspects of the question
+- Their response was on-topic but lacked depth or completeness
+- Action: Acknowledge what they covered (1 sentence) → Ask them to address the missing parts → THEN ask the next question for {category}
+
+SCENARIO C: Off-Topic or Irrelevant Answer
+- The candidate did not answer the question asked
+- Their response went in a completely different direction
+- Action: Politely note the disconnect (1 sentence) → Re-ask the previous question or clarify what you're looking for → THEN ask the next question for {category}
+
+SCENARIO D: Vague or Unclear Answer
+- The candidate gave a vague, generic, or unclear response
+- Lacks specific examples or concrete details
+- Action: Acknowledge their response (1 sentence) → Ask for specific examples or clarification on the previous question → THEN ask the next question for {category}
 
 FORMAT YOUR RESPONSE:
-[Brief acknowledgment]
-[New question for {category} category]
+[Analysis acknowledgment - what they did well or what was missing]
+[If needed: Follow-up on previous question to complete it]
+[New question aligned with {category} category]
 
 IMPORTANT:
-- Be encouraging and constructive
-- Don't be harsh about incomplete answers
-- Move the interview forward positively
+- Be constructive and encouraging, not harsh
+- Keep feedback brief and actionable
 - Do not mention category names explicitly
-- For technical categories (3, 6, 8), ask specific detailed questions"""
+- Maintain a professional, supportive tone
+- For technical categories (3, 6, 8), ask specific detailed questions
+- If following up on previous question, be clear about what aspect needs addressing"""
 
 
 async def analyze_answer_quality(previous_question: str, candidate_answer: str, interview_type: str) -> dict:
@@ -496,7 +485,6 @@ Return ONLY a JSON object in this exact format:
             "strengths": "Response received",
             "needs_follow_up": False
         }
-
 
 # API Routes
 @app.get("/")
@@ -717,7 +705,6 @@ Use this analysis to inform your response."""
         logger.error(f"❌ Error generating question: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error generating question: {str(e)}")
 
-
 @app.post("/api/audio/generate")
 async def generate_audio(text: str):
     """
@@ -857,15 +844,7 @@ Guidelines for evaluation:
 - Evaluate communication skills, technical knowledge, professionalism, and cultural fit
 - Provide actionable suggestions for improvement
 - Be encouraging while maintaining professional standards
-
-SCORING SCALE (be lenient and encouraging):
-- 5-6: Basic effort shown, participated in interview
-- 7-8: Good responses with relevant examples (MOST CANDIDATES should score here)
-- 9-10: Exceptional depth, insight, and professionalism
-- Overall scores below 6 should be RARE and only for severely inadequate responses
-- Default to 7-8 range for anyone making genuine effort
-- Give credit for attempting to answer even if not perfect
-- This is practice, so score to encourage improvement, not discourage
+- Score generously but honestly (6-7 is good, 8-9 is excellent, 10 is exceptional)
 
 Return ONLY the JSON object, no additional text."""
 
