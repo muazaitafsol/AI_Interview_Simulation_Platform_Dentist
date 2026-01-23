@@ -105,80 +105,25 @@ Your role is to ask thoughtful, relevant questions across ten specific categorie
 9. Fit & Professional Maturity
 10. Insight & Authenticity
 
-QUESTION VARIETY - MANDATORY:
-For each category, RANDOMLY select ONE question style from the options below. Do NOT default to generic "tell me about a time" questions.
+QUESTION GENERATION APPROACH:
+- For each category, generate UNIQUE, VARIED questions that assess the core competency
+- DO NOT rely on repetitive question patterns like "tell me about a time..."
+- MIX question styles: scenarios, technical how-to's, ethical dilemmas, hypotheticals, direct inquiries
+- Be creative and unpredictable while staying relevant to the category
+- Ensure questions feel natural, not templated
 
-Category 1 - Introduction (randomly pick one style):
-- Ask about their journey into dentistry and what sparked their interest
-- Ask what type of practice environment they thrive in
-- Ask about their ideal patient demographic and why
-- Ask what they're looking for in their next role specifically
-- Ask about a recent CE course that excited them
+CATEGORY GUIDANCE (use as inspiration, not rigid templates):
 
-Category 2 - Clinical Judgement (randomly pick one style):
-- Present a scenario: patient with conflicting symptoms, how would they diagnose?
-- Ask how they handle a treatment plan disagreement with a specialist
-- Present: patient refuses recommended treatment, what's their approach?
-- Ask about a time they had to change treatment mid-procedure
-- Present: emergency walk-in during a fully booked day, how do they triage?
-
-Category 3 - Technical Knowledge - Clinical Procedures (randomly pick one style):
-- Ask them to walk through their step-by-step approach to a molar root canal
-- Ask about their preferred matrix system for Class II composites and why
-- Ask how they determine when to extract vs. attempt to save a tooth
-- Ask about their crown prep technique and margin preferences
-- Ask how they manage a dry socket or post-extraction complication
-- Ask about their approach to treating severe dental anxiety during procedures
-
-Category 4 - Ethics, Consent & Communication (randomly pick one style):
-- Present: they notice a colleague's work that appears substandard
-- Ask how they explain complex treatment to a patient with low health literacy
-- Present: patient wants a treatment they believe is unnecessary
-- Ask about handling a patient complaint about billing
-- Present: family member pressuring patient into a treatment decision
-
-Category 5 - Productivity & Efficiency (randomly pick one style):
-- Ask how they handle running 30 minutes behind schedule
-- Ask about their strategies for minimizing chair time without compromising quality
-- Ask how they prepare for the next day's procedures
-- Ask about balancing thoroughness with practice production goals
-- Ask how they handle a no-show heavy day
-
-Category 6 - Technical Knowledge - Diagnosis & Treatment Planning (randomly pick one style):
-- Present a case: patient with multiple issues, ask them to prioritize treatment sequence
-- Ask how they interpret a specific radiographic finding (periapical lesion, bone loss, etc.)
-- Ask about their protocol for diagnosing cracked tooth syndrome
-- Ask how they develop a full-mouth rehabilitation plan
-- Ask about differentiating between reversible and irreversible pulpitis
-
-Category 7 - Mentorship & Independence (randomly pick one style):
-- Ask how they would help a new associate struggling with time management
-- Ask about a clinical skill they taught themselves vs. learned from a mentor
-- Ask how they handle situations where they need to ask for help
-- Ask about their approach to staying current without formal mentorship
-- Ask how they balance following office protocols vs. their own clinical judgment
-
-Category 8 - Technical Knowledge - Advanced Applications (randomly pick one style):
-- Ask about their experience with digital impression systems
-- Ask how they incorporate CBCT imaging into treatment planning
-- Ask about their approach to implant case selection
-- Ask about experience with CAD/CAM same-day restorations
-- Ask about laser applications they've used or want to learn
-- Ask about their experience with guided implant surgery
-
-Category 9 - Fit & Professional Maturity (randomly pick one style):
-- Ask what they do when they make a clinical mistake
-- Ask how they handle a personality conflict with a team member
-- Ask about their 5-year professional development goals
-- Ask what frustrates them most in a practice setting
-- Ask how they decompress after a difficult clinical day
-
-Category 10 - Insight & Authenticity (randomly pick one style):
-- Ask what clinical area they feel least confident in
-- Ask about feedback they've received that was hard to hear but valuable
-- Ask why they're leaving or left their previous position (honestly)
-- Ask what they would change about their clinical training
-- Ask what kind of dentist they don't want to become
+Introduction: Ask about their journey, interests, practice preferences, career goals, recent learning
+Clinical Judgement: Present real scenarios, ask about decision-making, handling disagreements, triage, adapting plans
+Technical Knowledge - Clinical Procedures: Ask step-by-step techniques, tool preferences, complication management, procedural approaches
+Ethics & Communication: Present ethical dilemmas, consent issues, patient conflicts, team dynamics
+Productivity & Efficiency: Discuss time management, scheduling challenges, quality vs. speed balance
+Technical Knowledge - Diagnosis & Treatment Planning: Case prioritization, interpreting findings, treatment sequencing
+Mentorship & Independence: Teaching others, learning independently, asking for help, balancing autonomy
+Technical Knowledge - Advanced Applications: Digital tools, CBCT, implants, CAD/CAM, lasers, new technologies
+Fit & Professional Maturity: Handling mistakes, conflicts, growth goals, challenges, stress management
+Insight & Authenticity: Self-awareness, accepting feedback, honest career reflections, areas of growth
 
 Guidelines:
 - Ask ONE question at a time
@@ -186,7 +131,8 @@ Guidelines:
 - If the answer was weak or off-topic, provide brief constructive feedback
 - Keep questions conversational yet professionally rigorous
 - Do not mention category names in your questions
-- Maintain a supportive tone with honest feedback""",
+- Maintain a supportive tone with honest feedback
+- VARY your question structures - avoid predictable patterns""",
 
     "hygienist": """You are an experienced dental practice manager conducting a professional interview for a dental hygienist position.
 
@@ -202,80 +148,25 @@ Your role is to ask thoughtful, relevant questions across ten specific categorie
 9. Fit & Professional Maturity
 10. Insight & Authenticity
 
-QUESTION VARIETY - MANDATORY:
-For each category, RANDOMLY select ONE question style from the options below. Do NOT default to generic "tell me about a time" questions.
+QUESTION GENERATION APPROACH:
+- For each category, generate UNIQUE, VARIED questions that assess the core competency
+- DO NOT rely on repetitive question patterns like "tell me about a time..."
+- MIX question styles: scenarios, technical how-to's, ethical dilemmas, hypotheticals, direct inquiries
+- Be creative and unpredictable while staying relevant to the category
+- Ensure questions feel natural, not templated
 
-Category 1 - Introduction (randomly pick one style):
-- Ask about their path to dental hygiene and what drew them to it
-- Ask what type of practice pace they prefer (fast-paced vs. relaxed)
-- Ask about their favorite aspect of patient care
-- Ask what they're specifically looking for in this role
-- Ask about a recent continuing education topic that interested them
+CATEGORY GUIDANCE (use as inspiration, not rigid templates):
 
-Category 2 - Clinical Judgement (randomly pick one style):
-- Present: patient with signs of oral cancer, what's their protocol?
-- Ask how they handle a patient who hasn't been seen in 5+ years
-- Present: patient with uncontrolled diabetes needing SRP
-- Ask about a time they identified something the dentist missed
-- Present: child patient who is extremely uncooperative
-
-Category 3 - Technical Knowledge - Clinical Procedures (randomly pick one style):
-- Ask about their instrument selection for heavy calculus vs. fine deposits
-- Ask them to describe their SRP technique step-by-step
-- Ask about their polishing paste selection criteria
-- Ask how they handle a patient with severe sensitivity during scaling
-- Ask about their approach to ultrasonic vs. hand scaling
-- Ask about their technique for applying fluoride varnish effectively
-
-Category 4 - Ethics, Consent & Communication (randomly pick one style):
-- Present: patient refuses necessary radiographs
-- Ask how they motivate a non-compliant periodontal patient
-- Present: they suspect a child patient is being neglected
-- Ask how they handle a patient who questions their competence
-- Present: patient asks them to not tell dentist about a concern
-
-Category 5 - Productivity & Efficiency (randomly pick one style):
-- Ask how they complete a prophy on a heavy calculus patient in 60 minutes
-- Ask about their room setup and turnover routine
-- Ask how they handle a double-booked schedule
-- Ask about prioritizing tasks when running behind
-- Ask how they handle a patient who wants to chat excessively
-
-Category 6 - Technical Knowledge - Diagnosis & Treatment Planning (randomly pick one style):
-- Ask how they classify periodontal disease and determine treatment
-- Ask about identifying and documenting recession
-- Present: patient with localized 6mm pockets, what's their assessment?
-- Ask about their protocol for oral cancer screening
-- Ask how they interpret bitewings for interproximal bone loss
-
-Category 7 - Mentorship & Independence (randomly pick one style):
-- Ask how they would orient a new hygienist to the practice
-- Ask about working independently vs. needing dentist guidance
-- Ask how they handle disagreeing with a dentist's treatment recommendation
-- Ask about a skill they've developed on their own
-- Ask how they stay updated on best practices
-
-Category 8 - Technical Knowledge - Advanced Applications (randomly pick one style):
-- Ask about their experience with piezoelectric scalers
-- Ask about laser therapy applications in hygiene
-- Ask about their experience with digital radiography techniques
-- Ask about desensitizing treatments they've found effective
-- Ask about air polishing systems and when they use them
-- Ask about their experience with intraoral cameras for patient education
-
-Category 9 - Fit & Professional Maturity (randomly pick one style):
-- Ask how they handle a mistake during a procedure
-- Ask about working with a difficult dentist or team member
-- Ask where they see their hygiene career in 5 years
-- Ask what aspects of hygiene they find most challenging
-- Ask how they maintain enthusiasm after years in the field
-
-Category 10 - Insight & Authenticity (randomly pick one style):
-- Ask what clinical skill they're actively trying to improve
-- Ask about critical feedback that helped them grow
-- Ask honestly why they're looking to leave their current position
-- Ask what they wish they'd learned more of in hygiene school
-- Ask about a professional weakness they're working on
+Introduction: Ask about their path to hygiene, practice preferences, patient care philosophy, role expectations
+Clinical Judgement: Present patient scenarios (cancer signs, heavy calculus, diabetes, pediatric challenges), assessment protocols
+Technical Knowledge - Clinical Procedures: Instrument selection, SRP techniques, polishing, sensitivity management, scaling approaches
+Ethics & Communication: Refusal of care, patient motivation, mandated reporting, competency questions, confidentiality
+Productivity & Efficiency: Time management, room setup, heavy schedules, patient flow, prioritization
+Technical Knowledge - Diagnosis & Treatment Planning: Periodontal classification, recession documentation, pocket assessment, cancer screening
+Mentorship & Independence: Training others, working autonomously, disagreeing with dentists, self-directed learning
+Technical Knowledge - Advanced Applications: Piezoelectric scalers, lasers, digital radiography, desensitizing treatments, air polishing
+Fit & Professional Maturity: Handling mistakes, team conflicts, career development, challenges, maintaining enthusiasm
+Insight & Authenticity: Areas for improvement, valuable feedback, honest career moves, training gaps, weaknesses
 
 Guidelines:
 - Ask ONE question at a time
@@ -283,9 +174,9 @@ Guidelines:
 - If the answer was weak or off-topic, provide brief constructive feedback
 - Keep questions conversational yet professionally rigorous
 - Do not mention category names in your questions
-- Maintain a supportive tone with honest feedback"""
+- Maintain a supportive tone with honest feedback
+- VARY your question structures - avoid predictable patterns"""
 }
-
 # Pydantic Models
 class InterviewStartRequest(BaseModel):
     interview_type: Literal["dentist", "hygienist"]
@@ -375,7 +266,9 @@ async def generate_audio_from_text(text: str) -> str:
         logger.error(f"Error generating audio: {str(e)}")
         return None
 
-def create_question_prompt(question_number: int, user_name: str, is_first: bool = False, previous_question: str = None, is_rephrase: bool = False, scenario: str = None) -> str:
+def create_question_prompt(question_number: int, user_name: str, is_first: bool = False, 
+                          previous_question: str = None, is_rephrase: bool = False, 
+                          scenario: str = None, clarification_count: int = 0) -> str:
     """Create a prompt for question generation based on category with answer analysis"""
     category = get_category_for_question(question_number)
     
@@ -386,8 +279,8 @@ Category focus: {category}
 
 Keep it conversational and welcoming. Only provide the greeting and question, nothing else."""
     
-    # If this is a rephrase after incomplete/off-topic/vague answer
-    if is_rephrase:
+    # If this is first clarification after incomplete/off-topic/vague answer
+    if is_rephrase and clarification_count == 0:
         scenario_messages = {
             "B": "I appreciate you sharing that, but I noticed you didn't fully address all aspects of the question.",
             "C": "I notice we went in a different direction than what I was asking about.",
@@ -411,7 +304,7 @@ Do NOT ask the next category question yet. Stay on the same topic but make it cl
 
 Format: [Acknowledgment] [Rephrased question with clearer guidance]"""
     
-    # Regular flow - complete answer or second attempt after rephrase
+    # Regular flow - complete answer, second attempt after rephrase, or moving on
     return f"""You are conducting an interview. Based on the candidate's response, determine what to do next.
 
 Previous question asked: {previous_question}
@@ -421,13 +314,13 @@ Category focus: {category}
 
 ANALYZE the candidate's previous response:
 
-If answer is COMPLETE (Scenario A):
+If answer is COMPLETE or PARTIALLY CORRECT (Scenario A or improved B/C/D):
 - Give brief positive acknowledgment (1-2 sentences)
 - Move to the next question for {category} category
 
-If answer is still INCOMPLETE/OFF-TOPIC/VAGUE (Scenario B/C/D):
+If this is the SECOND attempt and answer is STILL INCOMPLETE/OFF-TOPIC/VAGUE:
 - Give encouraging acknowledgment of their effort (1 sentence)
-- Briefly note what was missing but don't dwell on it
+- Briefly note what was missing but don't dwell on it ("While that didn't fully address X, let's move forward")
 - Move forward to the next question for {category} category
 - Maintain a positive, supportive tone
 
@@ -442,7 +335,7 @@ AVOID OVERUSED PHRASES like:
 - "I'd love to hear more about"
 
 INSTEAD, use varied acknowledgments like:
-For positive responses:
+For positive/partial responses:
 - "That experience with [specific detail] shows [quality]..."
 - "Your approach to [topic] demonstrates..."
 - "I can see you've thought carefully about..."
@@ -451,14 +344,12 @@ For positive responses:
 - "You've highlighted an important aspect of..."
 - "Your experience in [area] is relevant here..."
 
-For incomplete/off-topic responses:
-- "I see where you're going, but let's refocus on..."
-- "You've touched on something, though I was asking more about..."
-- "Let me redirect us a bit..."
-- "I notice we've moved away from..."
-- "That's one angle, but I'm curious about..."
-- "I appreciate the effort, though the question was specifically about..."
-- "Let's zero in on a different aspect..."
+For moving on after incomplete second attempt:
+- "While we didn't quite get to [topic], let's explore something else..."
+- "I see your perspective, though let's shift to..."
+- "Let me redirect us to a different area..."
+- "That's one angle - now let's talk about..."
+- "I appreciate the effort. Moving on..."
 
 For moving to next question:
 - "Now, let's talk about..."
@@ -660,28 +551,31 @@ async def generate_question(request: QuestionRequest, include_audio: bool = True
         previous_question = None
         candidate_answer = None
         
-        if len(request.conversation_history) >= 2:
-            # Get the last assistant message (previous question)
-            for i in range(len(request.conversation_history) - 1, -1, -1):
-                if request.conversation_history[i].role == "assistant":
-                    previous_question = request.conversation_history[i].content
-                    break
-            
-            # Get the last user message (candidate's answer)
-            for i in range(len(request.conversation_history) - 1, -1, -1):
-                if request.conversation_history[i].role == "user":
-                    candidate_answer = request.conversation_history[i].content
-                    break
-        
         # Analyze previous answer if available
         analysis = None
+        clarification_count = 0
+        
+        # Check if this is a clarification attempt by looking at conversation history
+        if len(request.conversation_history) >= 4:
+            # Check if the last two assistant messages were about the same topic (indicating a clarification)
+            assistant_messages = [msg for msg in request.conversation_history if msg.role == "assistant"]
+            if len(assistant_messages) >= 2:
+                # Simple heuristic: if questions are similar, it's likely a clarification
+                last_two = assistant_messages[-2:]
+                if len(last_two[0].content) > 50 and len(last_two[1].content) > 50:
+                    # Count clarifications (simplified approach)
+                    clarification_count = 1 if "rephrase" in last_two[1].content.lower() or "let me clarify" in last_two[1].content.lower() else 0
+        
         if previous_question and candidate_answer:
             logger.info(f"🔍 Analyzing previous answer...")
             analysis = await analyze_answer_quality(previous_question, candidate_answer, request.interview_type)
             logger.info(f"📊 Analysis Result: Scenario {analysis['scenario']} - {analysis['reasoning']}")
             
-            if analysis.get('needs_follow_up'):
-                logger.info(f"⚠️  Follow-up needed on previous question")
+            # Determine if we need clarification (only once)
+            if analysis.get('needs_follow_up') and clarification_count == 0:
+                logger.info(f"⚠️  First clarification needed on previous question")
+            elif analysis.get('needs_follow_up') and clarification_count > 0:
+                logger.info(f"⚠️  Second attempt was still incomplete, moving on")
         
         # Convert conversation history to OpenAI format
         messages = [{"role": "system", "content": system_prompt}]
@@ -692,30 +586,38 @@ async def generate_question(request: QuestionRequest, include_audio: bool = True
                 "content": msg.content
             })
         
+        # Determine if this should be a rephrase (clarification) or move forward
+        should_rephrase = (analysis and 
+                          analysis.get('needs_follow_up') and 
+                          analysis['scenario'] in ['B', 'C', 'D'] and
+                          clarification_count == 0)
+        
         # Add prompt for next question with analysis context
         is_first = request.question_number == 1
         user_prompt = create_question_prompt(
             request.question_number, 
             request.user_name, 
             is_first,
-            previous_question
+            previous_question,
+            is_rephrase=should_rephrase,
+            scenario=analysis.get('scenario') if analysis else None,
+            clarification_count=clarification_count
         )
         
-        # Add analysis context if available
-        if analysis:
+        # Add analysis context if available and not rephrasing
+        if analysis and not should_rephrase:
             analysis_context = f"""
 ANSWER ANALYSIS:
 - Scenario: {analysis['scenario']}
 - Reasoning: {analysis['reasoning']}
 - Missing aspects: {', '.join(analysis['missing_aspects']) if analysis['missing_aspects'] else 'None'}
 - Strengths: {analysis['strengths']}
-- Needs follow-up: {'Yes' if analysis['needs_follow_up'] else 'No'}
+- Clarification count: {clarification_count}
 
 Use this analysis to inform your response."""
             user_prompt = user_prompt + "\n\n" + analysis_context
         
-        messages.append({"role": "user", "content": user_prompt})
-        
+        messages.append({"role": "user", "content": user_prompt})        
         # Generate question using OpenAI
         response = openai.chat.completions.create(
             model="gpt-4o-mini",
@@ -862,19 +764,18 @@ Interview Categories (in order):
 
 Provide your evaluation in the following JSON format:
 {{
-    "overall_score": <number between 1-10>,
-    ""category_scores": {{
-            "Introduction": <score 1-10>,
-            "Clinical Judgement": <score 1-10>,
-            "Technical Knowledge - Clinical Procedures": <score 1-10>,
-            "Ethics, Consent & Communication": <score 1-10>,
-            "Productivity & Efficiency": <score 1-10>,
-            "Technical Knowledge - Advanced Applications": <score 1-10>,
-            "Mentorship & Independence": <score 1-10>,
-            "Technical Knowledge - Diagnosis & Treatment Planning": <score 1-10>,
-            "Fit & Professional Maturity": <score 1-10>,
-            "Insight & Authenticity": <score 1-10>
-    }},
+    "overall_score": <number between 5-10>,
+    "category_scores": {{
+        "Introduction": <score 5-10>,
+        "Clinical Judgement": <score 5-10>,
+        "Technical Knowledge - Clinical Procedures": <score 5-10>,
+        "Ethics, Consent & Communication": <score 5-10>,
+        "Productivity & Efficiency": <score 5-10>,
+        "Technical Knowledge - Advanced Applications": <score 5-10>,
+        "Mentorship & Independence": <score 5-10>,
+        "Technical Knowledge - Diagnosis & Treatment Planning": <score 5-10>,
+        "Fit & Professional Maturity": <score 5-10>,
+        "Insight & Authenticity": <score 5-10>
     }},
     "strengths": [
         "<specific strength 1>",
@@ -898,14 +799,21 @@ Guidelines for evaluation:
 - Provide actionable suggestions for improvement
 - Be encouraging while maintaining professional standards
 
-SCORING SCALE (be lenient and encouraging):
-- 5-6: Basic effort shown, participated in interview
-- 7-8: Good responses with relevant examples (MOST CANDIDATES should score here)
-- 9-10: Exceptional depth, insight, and professionalism
-- Overall scores below 6 should be RARE and only for severely inadequate responses
-- Default to 7-8 range for anyone making genuine effort
-- Give credit for attempting to answer even if not perfect
-- This is practice, so score to encourage improvement, not discourage
+SIMPLIFIED SCORING SCALE (5-10, very lenient and encouraging):
+- 5.0-6.0: Participated and made an effort, basic responses provided
+- 6.5-7.0: Decent effort with some relevant information shared
+- 7.5-8.0: Good responses with relevant examples (DEFAULT for most candidates)
+- 8.5-9.0: Strong performance with detailed, thoughtful answers
+- 9.5-10.0: Exceptional - outstanding depth, insight, and professionalism
+
+SCORING GUIDELINES:
+- START at 6.5 as the baseline for anyone who participated genuinely
+- Only go below 7.0 if responses were consistently very brief or off-topic
+- Score 8+ for solid, well-articulated answers with examples
+- Score 9+ for truly impressive, detailed responses showing expertise
+- This is PRACTICE, so be generous and encouraging
+- Give credit for effort and engagement
+- Focus on growth potential in feedback, not harsh criticism
 
 Return ONLY the JSON object, no additional text."""
 
