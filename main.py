@@ -266,9 +266,7 @@ async def generate_audio_from_text(text: str) -> str:
         logger.error(f"Error generating audio: {str(e)}")
         return None
 
-def create_question_prompt(question_number: int, user_name: str, is_first: bool = False, 
-                          previous_question: str = None, is_rephrase: bool = False, 
-                          scenario: str = None, clarification_count: int = 0) -> str:
+def create_question_prompt(question_number: int, user_name: str, is_first: bool = False, previous_question: str = None, is_rephrase: bool = False, scenario: str = None) -> str:
     """Create a prompt for question generation based on category with answer analysis"""
     category = get_category_for_question(question_number)
     
@@ -279,8 +277,8 @@ Category focus: {category}
 
 Keep it conversational and welcoming. Only provide the greeting and question, nothing else."""
     
-    # If this is first clarification after incomplete/off-topic/vague answer
-    if is_rephrase and clarification_count == 0:
+    # If this is a rephrase after incomplete/off-topic/vague answer
+    if is_rephrase:
         scenario_messages = {
             "B": "I appreciate you sharing that, but I noticed you didn't fully address all aspects of the question.",
             "C": "I notice we went in a different direction than what I was asking about.",
@@ -292,7 +290,7 @@ Keep it conversational and welcoming. Only provide the greeting and question, no
         return f"""The candidate gave an incomplete/off-topic/vague answer to the previous question.
 
 Previous question: {previous_question}
-Scenario: {scenario}
+Analysis: {previous_answer_analysis.get('reasoning')}
 
 Your task:
 1. Start with this acknowledgment: "{acknowledgment}"
@@ -304,7 +302,7 @@ Do NOT ask the next category question yet. Stay on the same topic but make it cl
 
 Format: [Acknowledgment] [Rephrased question with clearer guidance]"""
     
-    # Regular flow - complete answer, second attempt after rephrase, or moving on
+    # Regular flow - complete answer or second attempt after rephrase
     return f"""You are conducting an interview. Based on the candidate's response, determine what to do next.
 
 Previous question asked: {previous_question}
@@ -314,13 +312,13 @@ Category focus: {category}
 
 ANALYZE the candidate's previous response:
 
-If answer is COMPLETE or PARTIALLY CORRECT (Scenario A or improved B/C/D):
+If answer is COMPLETE (Scenario A):
 - Give brief positive acknowledgment (1-2 sentences)
 - Move to the next question for {category} category
 
-If this is the SECOND attempt and answer is STILL INCOMPLETE/OFF-TOPIC/VAGUE:
+If answer is still INCOMPLETE/OFF-TOPIC/VAGUE (Scenario B/C/D):
 - Give encouraging acknowledgment of their effort (1 sentence)
-- Briefly note what was missing but don't dwell on it ("While that didn't fully address X, let's move forward")
+- Briefly note what was missing but don't dwell on it
 - Move forward to the next question for {category} category
 - Maintain a positive, supportive tone
 
@@ -335,21 +333,23 @@ AVOID OVERUSED PHRASES like:
 - "I'd love to hear more about"
 
 INSTEAD, use varied acknowledgments like:
-For positive/partial responses:
+For positive responses:
 - "That experience with [specific detail] shows [quality]..."
 - "Your approach to [topic] demonstrates..."
-- "I can see you've thought carefully about..."
+- "I can see you've thought about..."
 - "Interesting point about [specific aspect]..."
 - "That's a solid perspective on..."
 - "You've highlighted an important aspect of..."
 - "Your experience in [area] is relevant here..."
 
-For moving on after incomplete second attempt:
-- "While we didn't quite get to [topic], let's explore something else..."
-- "I see your perspective, though let's shift to..."
-- "Let me redirect us to a different area..."
-- "That's one angle - now let's talk about..."
-- "I appreciate the effort. Moving on..."
+For incomplete/off-topic responses:
+- "I see where you're going, but let's refocus on..."
+- "You've touched on something, though I was asking more about..."
+- "Let me redirect us a bit..."
+- "I notice we've moved away from..."
+- "That's one angle, but I'm curious about..."
+- "I appreciate the effort, though the question was specifically about..."
+- "Let's zero in on a different aspect..."
 
 For moving to next question:
 - "Now, let's talk about..."
@@ -359,20 +359,26 @@ For moving to next question:
 - "I'm curious about your thoughts on..."
 - "Consider this situation..."
 - "Let's shift gears..."
+- "On a different note..."
 
 FORMAT YOUR RESPONSE:
-[Brief, VARIED acknowledgment - never use same phrases twice]
+[Brief, VARIED acknowledgment - be natural and conversational]
 [New question for {category} category]
 
 IMPORTANT:
-- Be encouraging and constructive
-- VARY your language - repetition sounds robotic
-- Keep acknowledgments natural and conversational
-- Don't be harsh about incomplete answers
-- Move the interview forward positively
-- Do not mention category names explicitly
+- Keep acknowledgments brief and natural
+- VARY your language - avoid repetition
+- Don't mention category names explicitly
 - For technical categories (3, 6, 8), ask specific detailed questions
-- Make each acknowledgment feel fresh and unique"""
+- Move the interview forward positively"""
+    
+    # Fallback if no analysis (shouldn't happen, but just in case)
+    return f"""Continue the interview by asking the next question for the {category} category.
+
+Current question number: {question_number}
+Category focus: {category}
+
+Ask a thoughtful, varied question that assesses this competency. Do not mention the category name explicitly."""
 
 async def analyze_answer_quality(previous_question: str, candidate_answer: str, interview_type: str) -> dict:
     """
@@ -386,20 +392,22 @@ PREVIOUS QUESTION: {previous_question}
 
 CANDIDATE'S ANSWER: {candidate_answer}
 
-Analyze this answer and classify it into ONE of these scenarios:
+Analyze this answer and classify it into ONE of these THREE scenarios:
 
-A) COMPLETE - Fully answered the question, on-topic, adequate detail
-B) INCOMPLETE - Partially answered, on-topic but missing key aspects
-C) OFF_TOPIC - Did not address the question, went in wrong direction
-D) VAGUE - Answered but too generic, lacks specific examples/details
+A) CORRECT_ON_TOPIC - The answer is relevant and addresses the question (can be right, partially right, or even wrong but still within the context of what was asked)
+B) OFF_TOPIC - The answer is completely irrelevant and does not address what was asked at all
+
+Examples:
+- Question: "How do you handle a difficult patient?" Answer: "I would stay calm and listen to their concerns" → A (on-topic, good answer)
+- Question: "How do you handle a difficult patient?" Answer: "I think patients should always be nice" → A (on-topic but weak/wrong answer)
+- Question: "How do you handle a difficult patient?" Answer: "I like to play tennis on weekends" → B (completely off-topic)
 
 Return ONLY a JSON object in this exact format:
 {{
-    "scenario": "<A, B, C, or D>",
+    "scenario": "<A or B>",
     "reasoning": "<brief 1-sentence explanation>",
-    "missing_aspects": ["<aspect 1>", "<aspect 2>"] or [],
-    "strengths": "<what they did well, if anything>",
-    "needs_follow_up": <true or false>
+    "answer_quality": "<good/weak/wrong/irrelevant>",
+    "is_on_topic": <true or false>
 }}"""
 
         response = openai.chat.completions.create(
@@ -419,13 +427,12 @@ Return ONLY a JSON object in this exact format:
         
     except Exception as e:
         logger.error(f"Error analyzing answer: {str(e)}")
-        # Default to complete if analysis fails
+        # Default to on-topic if analysis fails
         return {
             "scenario": "A",
             "reasoning": "Analysis unavailable",
-            "missing_aspects": [],
-            "strengths": "Response received",
-            "needs_follow_up": False
+            "answer_quality": "unknown",
+            "is_on_topic": True
         }
 
 
@@ -535,7 +542,9 @@ async def start_interview(request: InterviewStartRequest, include_audio: bool = 
 async def generate_question(request: QuestionRequest, include_audio: bool = True):
     """
     Generate next interview question based on conversation history
-    Now includes answer analysis and adaptive questioning
+    Analyzes previous answer and handles three scenarios:
+    1. On-topic answer (right, partially right, or wrong but relevant) - acknowledge and move on
+    2. Off-topic answer (completely irrelevant) - point out and move on
     """
     try:
         logger.info(f"\n📋 QUESTION {request.question_number} | Interview Type: {request.interview_type}")
@@ -550,6 +559,19 @@ async def generate_question(request: QuestionRequest, include_audio: bool = True
         # Extract previous question and answer for analysis
         previous_question = None
         candidate_answer = None
+        
+        if len(request.conversation_history) >= 2:
+            # Get the last assistant message (previous question)
+            for i in range(len(request.conversation_history) - 1, -1, -1):
+                if request.conversation_history[i].role == "assistant":
+                    previous_question = request.conversation_history[i].content
+                    break
+            
+            # Get the last user message (candidate's answer)
+            for i in range(len(request.conversation_history) - 1, -1, -1):
+                if request.conversation_history[i].role == "user":
+                    candidate_answer = request.conversation_history[i].content
+                    break
         
         # Analyze previous answer if available
         analysis = None
@@ -571,11 +593,8 @@ async def generate_question(request: QuestionRequest, include_audio: bool = True
             analysis = await analyze_answer_quality(previous_question, candidate_answer, request.interview_type)
             logger.info(f"📊 Analysis Result: Scenario {analysis['scenario']} - {analysis['reasoning']}")
             
-            # Determine if we need clarification (only once)
-            if analysis.get('needs_follow_up') and clarification_count == 0:
-                logger.info(f"⚠️  First clarification needed on previous question")
-            elif analysis.get('needs_follow_up') and clarification_count > 0:
-                logger.info(f"⚠️  Second attempt was still incomplete, moving on")
+            if analysis.get('needs_follow_up'):
+                logger.info(f"⚠️  Follow-up needed on previous question")
         
         # Convert conversation history to OpenAI format
         messages = [{"role": "system", "content": system_prompt}]
@@ -586,44 +605,36 @@ async def generate_question(request: QuestionRequest, include_audio: bool = True
                 "content": msg.content
             })
         
-        # Determine if this should be a rephrase (clarification) or move forward
-        should_rephrase = (analysis and 
-                          analysis.get('needs_follow_up') and 
-                          analysis['scenario'] in ['B', 'C', 'D'] and
-                          clarification_count == 0)
-        
         # Add prompt for next question with analysis context
         is_first = request.question_number == 1
         user_prompt = create_question_prompt(
             request.question_number, 
             request.user_name, 
             is_first,
-            previous_question,
-            is_rephrase=should_rephrase,
-            scenario=analysis.get('scenario') if analysis else None,
-            clarification_count=clarification_count
+            previous_question
         )
         
-        # Add analysis context if available and not rephrasing
-        if analysis and not should_rephrase:
+        # Add analysis context if available
+        if analysis:
             analysis_context = f"""
 ANSWER ANALYSIS:
 - Scenario: {analysis['scenario']}
 - Reasoning: {analysis['reasoning']}
 - Missing aspects: {', '.join(analysis['missing_aspects']) if analysis['missing_aspects'] else 'None'}
 - Strengths: {analysis['strengths']}
-- Clarification count: {clarification_count}
+- Needs follow-up: {'Yes' if analysis['needs_follow_up'] else 'No'}
 
 Use this analysis to inform your response."""
             user_prompt = user_prompt + "\n\n" + analysis_context
         
-        messages.append({"role": "user", "content": user_prompt})        
+        messages.append({"role": "user", "content": user_prompt})
+        
         # Generate question using OpenAI
         response = openai.chat.completions.create(
             model="gpt-4o-mini",
             messages=messages,
             temperature=0.7,
-            max_tokens=400  # Increased for potential follow-up questions
+            max_tokens=400
         )
         
         question = response.choices[0].message.content.strip()
