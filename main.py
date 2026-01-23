@@ -775,18 +775,18 @@ Interview Categories (in order):
 
 Provide your evaluation in the following JSON format:
 {{
-    "overall_score": <number between 5-10>,
+    "overall_score": <number between 0-10>,
     "category_scores": {{
-        "Introduction": <score 5-10>,
-        "Clinical Judgement": <score 5-10>,
-        "Technical Knowledge - Clinical Procedures": <score 5-10>,
-        "Ethics, Consent & Communication": <score 5-10>,
-        "Productivity & Efficiency": <score 5-10>,
-        "Technical Knowledge - Advanced Applications": <score 5-10>,
-        "Mentorship & Independence": <score 5-10>,
-        "Technical Knowledge - Diagnosis & Treatment Planning": <score 5-10>,
-        "Fit & Professional Maturity": <score 5-10>,
-        "Insight & Authenticity": <score 5-10>
+        "Introduction": <score 0-10>,
+        "Clinical Judgement": <score 0-10>,
+        "Technical Knowledge - Clinical Procedures": <score 0-10>,
+        "Ethics, Consent & Communication": <score 0-10>,
+        "Productivity & Efficiency": <score 0-10>,
+        "Technical Knowledge - Advanced Applications": <score 0-10>,
+        "Mentorship & Independence": <score 0-10>,
+        "Technical Knowledge - Diagnosis & Treatment Planning": <score 0-10>,
+        "Fit & Professional Maturity": <score 0-10>,
+        "Insight & Authenticity": <score 0-10>
     }},
     "strengths": [
         "<specific strength 1>",
@@ -810,21 +810,20 @@ Guidelines for evaluation:
 - Provide actionable suggestions for improvement
 - Be encouraging while maintaining professional standards
 
-SIMPLIFIED SCORING SCALE (5-10, very lenient and encouraging):
-- 5.0-6.0: Participated and made an effort, basic responses provided
-- 6.5-7.0: Decent effort with some relevant information shared
-- 7.5-8.0: Good responses with relevant examples (DEFAULT for most candidates)
-- 8.5-9.0: Strong performance with detailed, thoughtful answers
-- 9.5-10.0: Exceptional - outstanding depth, insight, and professionalism
+SCORING SCALE (0-10):
+- 0-2: OUT OF CONTEXT - Response is irrelevant, off-topic, or unrelated to the question asked
+- 2-4: INCORRECT - Response attempts to answer but contains wrong information or misunderstanding
+- 5-7: PARTIALLY CORRECT - Response shows understanding but is incomplete, missing key points, or lacks depth
+- 8-10: CORRECT - Response is accurate, complete, relevant, and demonstrates good understanding
 
 SCORING GUIDELINES:
-- START at 6.5 as the baseline for anyone who participated genuinely
-- Only go below 7.0 if responses were consistently very brief or off-topic
-- Score 8+ for solid, well-articulated answers with examples
-- Score 9+ for truly impressive, detailed responses showing expertise
-- This is PRACTICE, so be generous and encouraging
-- Give credit for effort and engagement
-- Focus on growth potential in feedback, not harsh criticism
+- Evaluate each response based on RELEVANCE and CORRECTNESS
+- 0-2: Use when the candidate talks about something completely unrelated to the question
+- 2-4: Use when the candidate tries to answer but gets facts wrong or shows misconceptions
+- 5-7: Use when the candidate is on the right track but missing important details or only partially addresses the question
+- 8-10: Use when the candidate provides a complete, accurate, and well-articulated answer
+- This is PRACTICE, so provide constructive feedback to help candidates improve
+- In detailed_feedback, explain what was missing or incorrect and what a better answer would include
 
 Return ONLY the JSON object, no additional text."""
 
