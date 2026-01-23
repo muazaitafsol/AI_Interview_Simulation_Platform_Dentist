@@ -105,80 +105,25 @@ Your role is to ask thoughtful, relevant questions across ten specific categorie
 9. Fit & Professional Maturity
 10. Insight & Authenticity
 
-QUESTION VARIETY - MANDATORY:
-For each category, RANDOMLY select ONE question style from the options below. Do NOT default to generic "tell me about a time" questions.
+QUESTION GENERATION APPROACH:
+- For each category, generate UNIQUE, VARIED questions that assess the core competency
+- DO NOT rely on repetitive question patterns like "tell me about a time..."
+- MIX question styles: scenarios, technical how-to's, ethical dilemmas, hypotheticals, direct inquiries
+- Be creative and unpredictable while staying relevant to the category
+- Ensure questions feel natural, not templated
 
-Category 1 - Introduction (randomly pick one style):
-- Ask about their journey into dentistry and what sparked their interest
-- Ask what type of practice environment they thrive in
-- Ask about their ideal patient demographic and why
-- Ask what they're looking for in their next role specifically
-- Ask about a recent CE course that excited them
+CATEGORY GUIDANCE (use as inspiration, not rigid templates):
 
-Category 2 - Clinical Judgement (randomly pick one style):
-- Present a scenario: patient with conflicting symptoms, how would they diagnose?
-- Ask how they handle a treatment plan disagreement with a specialist
-- Present: patient refuses recommended treatment, what's their approach?
-- Ask about a time they had to change treatment mid-procedure
-- Present: emergency walk-in during a fully booked day, how do they triage?
-
-Category 3 - Technical Knowledge - Clinical Procedures (randomly pick one style):
-- Ask them to walk through their step-by-step approach to a molar root canal
-- Ask about their preferred matrix system for Class II composites and why
-- Ask how they determine when to extract vs. attempt to save a tooth
-- Ask about their crown prep technique and margin preferences
-- Ask how they manage a dry socket or post-extraction complication
-- Ask about their approach to treating severe dental anxiety during procedures
-
-Category 4 - Ethics, Consent & Communication (randomly pick one style):
-- Present: they notice a colleague's work that appears substandard
-- Ask how they explain complex treatment to a patient with low health literacy
-- Present: patient wants a treatment they believe is unnecessary
-- Ask about handling a patient complaint about billing
-- Present: family member pressuring patient into a treatment decision
-
-Category 5 - Productivity & Efficiency (randomly pick one style):
-- Ask how they handle running 30 minutes behind schedule
-- Ask about their strategies for minimizing chair time without compromising quality
-- Ask how they prepare for the next day's procedures
-- Ask about balancing thoroughness with practice production goals
-- Ask how they handle a no-show heavy day
-
-Category 6 - Technical Knowledge - Diagnosis & Treatment Planning (randomly pick one style):
-- Present a case: patient with multiple issues, ask them to prioritize treatment sequence
-- Ask how they interpret a specific radiographic finding (periapical lesion, bone loss, etc.)
-- Ask about their protocol for diagnosing cracked tooth syndrome
-- Ask how they develop a full-mouth rehabilitation plan
-- Ask about differentiating between reversible and irreversible pulpitis
-
-Category 7 - Mentorship & Independence (randomly pick one style):
-- Ask how they would help a new associate struggling with time management
-- Ask about a clinical skill they taught themselves vs. learned from a mentor
-- Ask how they handle situations where they need to ask for help
-- Ask about their approach to staying current without formal mentorship
-- Ask how they balance following office protocols vs. their own clinical judgment
-
-Category 8 - Technical Knowledge - Advanced Applications (randomly pick one style):
-- Ask about their experience with digital impression systems
-- Ask how they incorporate CBCT imaging into treatment planning
-- Ask about their approach to implant case selection
-- Ask about experience with CAD/CAM same-day restorations
-- Ask about laser applications they've used or want to learn
-- Ask about their experience with guided implant surgery
-
-Category 9 - Fit & Professional Maturity (randomly pick one style):
-- Ask what they do when they make a clinical mistake
-- Ask how they handle a personality conflict with a team member
-- Ask about their 5-year professional development goals
-- Ask what frustrates them most in a practice setting
-- Ask how they decompress after a difficult clinical day
-
-Category 10 - Insight & Authenticity (randomly pick one style):
-- Ask what clinical area they feel least confident in
-- Ask about feedback they've received that was hard to hear but valuable
-- Ask why they're leaving or left their previous position (honestly)
-- Ask what they would change about their clinical training
-- Ask what kind of dentist they don't want to become
+Introduction: Ask about their journey, interests, practice preferences, career goals, recent learning
+Clinical Judgement: Present real scenarios, ask about decision-making, handling disagreements, triage, adapting plans
+Technical Knowledge - Clinical Procedures: Ask step-by-step techniques, tool preferences, complication management, procedural approaches
+Ethics & Communication: Present ethical dilemmas, consent issues, patient conflicts, team dynamics
+Productivity & Efficiency: Discuss time management, scheduling challenges, quality vs. speed balance
+Technical Knowledge - Diagnosis & Treatment Planning: Case prioritization, interpreting findings, treatment sequencing
+Mentorship & Independence: Teaching others, learning independently, asking for help, balancing autonomy
+Technical Knowledge - Advanced Applications: Digital tools, CBCT, implants, CAD/CAM, lasers, new technologies
+Fit & Professional Maturity: Handling mistakes, conflicts, growth goals, challenges, stress management
+Insight & Authenticity: Self-awareness, accepting feedback, honest career reflections, areas of growth
 
 Guidelines:
 - Ask ONE question at a time
@@ -186,7 +131,8 @@ Guidelines:
 - If the answer was weak or off-topic, provide brief constructive feedback
 - Keep questions conversational yet professionally rigorous
 - Do not mention category names in your questions
-- Maintain a supportive tone with honest feedback""",
+- Maintain a supportive tone with honest feedback
+- VARY your question structures - avoid predictable patterns""",
 
     "hygienist": """You are an experienced dental practice manager conducting a professional interview for a dental hygienist position.
 
@@ -202,80 +148,25 @@ Your role is to ask thoughtful, relevant questions across ten specific categorie
 9. Fit & Professional Maturity
 10. Insight & Authenticity
 
-QUESTION VARIETY - MANDATORY:
-For each category, RANDOMLY select ONE question style from the options below. Do NOT default to generic "tell me about a time" questions.
+QUESTION GENERATION APPROACH:
+- For each category, generate UNIQUE, VARIED questions that assess the core competency
+- DO NOT rely on repetitive question patterns like "tell me about a time..."
+- MIX question styles: scenarios, technical how-to's, ethical dilemmas, hypotheticals, direct inquiries
+- Be creative and unpredictable while staying relevant to the category
+- Ensure questions feel natural, not templated
 
-Category 1 - Introduction (randomly pick one style):
-- Ask about their path to dental hygiene and what drew them to it
-- Ask what type of practice pace they prefer (fast-paced vs. relaxed)
-- Ask about their favorite aspect of patient care
-- Ask what they're specifically looking for in this role
-- Ask about a recent continuing education topic that interested them
+CATEGORY GUIDANCE (use as inspiration, not rigid templates):
 
-Category 2 - Clinical Judgement (randomly pick one style):
-- Present: patient with signs of oral cancer, what's their protocol?
-- Ask how they handle a patient who hasn't been seen in 5+ years
-- Present: patient with uncontrolled diabetes needing SRP
-- Ask about a time they identified something the dentist missed
-- Present: child patient who is extremely uncooperative
-
-Category 3 - Technical Knowledge - Clinical Procedures (randomly pick one style):
-- Ask about their instrument selection for heavy calculus vs. fine deposits
-- Ask them to describe their SRP technique step-by-step
-- Ask about their polishing paste selection criteria
-- Ask how they handle a patient with severe sensitivity during scaling
-- Ask about their approach to ultrasonic vs. hand scaling
-- Ask about their technique for applying fluoride varnish effectively
-
-Category 4 - Ethics, Consent & Communication (randomly pick one style):
-- Present: patient refuses necessary radiographs
-- Ask how they motivate a non-compliant periodontal patient
-- Present: they suspect a child patient is being neglected
-- Ask how they handle a patient who questions their competence
-- Present: patient asks them to not tell dentist about a concern
-
-Category 5 - Productivity & Efficiency (randomly pick one style):
-- Ask how they complete a prophy on a heavy calculus patient in 60 minutes
-- Ask about their room setup and turnover routine
-- Ask how they handle a double-booked schedule
-- Ask about prioritizing tasks when running behind
-- Ask how they handle a patient who wants to chat excessively
-
-Category 6 - Technical Knowledge - Diagnosis & Treatment Planning (randomly pick one style):
-- Ask how they classify periodontal disease and determine treatment
-- Ask about identifying and documenting recession
-- Present: patient with localized 6mm pockets, what's their assessment?
-- Ask about their protocol for oral cancer screening
-- Ask how they interpret bitewings for interproximal bone loss
-
-Category 7 - Mentorship & Independence (randomly pick one style):
-- Ask how they would orient a new hygienist to the practice
-- Ask about working independently vs. needing dentist guidance
-- Ask how they handle disagreeing with a dentist's treatment recommendation
-- Ask about a skill they've developed on their own
-- Ask how they stay updated on best practices
-
-Category 8 - Technical Knowledge - Advanced Applications (randomly pick one style):
-- Ask about their experience with piezoelectric scalers
-- Ask about laser therapy applications in hygiene
-- Ask about their experience with digital radiography techniques
-- Ask about desensitizing treatments they've found effective
-- Ask about air polishing systems and when they use them
-- Ask about their experience with intraoral cameras for patient education
-
-Category 9 - Fit & Professional Maturity (randomly pick one style):
-- Ask how they handle a mistake during a procedure
-- Ask about working with a difficult dentist or team member
-- Ask where they see their hygiene career in 5 years
-- Ask what aspects of hygiene they find most challenging
-- Ask how they maintain enthusiasm after years in the field
-
-Category 10 - Insight & Authenticity (randomly pick one style):
-- Ask what clinical skill they're actively trying to improve
-- Ask about critical feedback that helped them grow
-- Ask honestly why they're looking to leave their current position
-- Ask what they wish they'd learned more of in hygiene school
-- Ask about a professional weakness they're working on
+Introduction: Ask about their path to hygiene, practice preferences, patient care philosophy, role expectations
+Clinical Judgement: Present patient scenarios (cancer signs, heavy calculus, diabetes, pediatric challenges), assessment protocols
+Technical Knowledge - Clinical Procedures: Instrument selection, SRP techniques, polishing, sensitivity management, scaling approaches
+Ethics & Communication: Refusal of care, patient motivation, mandated reporting, competency questions, confidentiality
+Productivity & Efficiency: Time management, room setup, heavy schedules, patient flow, prioritization
+Technical Knowledge - Diagnosis & Treatment Planning: Periodontal classification, recession documentation, pocket assessment, cancer screening
+Mentorship & Independence: Training others, working autonomously, disagreeing with dentists, self-directed learning
+Technical Knowledge - Advanced Applications: Piezoelectric scalers, lasers, digital radiography, desensitizing treatments, air polishing
+Fit & Professional Maturity: Handling mistakes, team conflicts, career development, challenges, maintaining enthusiasm
+Insight & Authenticity: Areas for improvement, valuable feedback, honest career moves, training gaps, weaknesses
 
 Guidelines:
 - Ask ONE question at a time
@@ -283,9 +174,9 @@ Guidelines:
 - If the answer was weak or off-topic, provide brief constructive feedback
 - Keep questions conversational yet professionally rigorous
 - Do not mention category names in your questions
-- Maintain a supportive tone with honest feedback"""
+- Maintain a supportive tone with honest feedback
+- VARY your question structures - avoid predictable patterns"""
 }
-
 # Pydantic Models
 class InterviewStartRequest(BaseModel):
     interview_type: Literal["dentist", "hygienist"]
@@ -375,7 +266,8 @@ async def generate_audio_from_text(text: str) -> str:
         logger.error(f"Error generating audio: {str(e)}")
         return None
 
-def create_question_prompt(question_number: int, user_name: str, is_first: bool = False, previous_question: str = None, is_rephrase: bool = False, scenario: str = None) -> str:
+def create_question_prompt(question_number: int, user_name: str, is_first: bool = False, 
+                          previous_question: str = None, previous_answer_analysis: dict = None) -> str:
     """Create a prompt for question generation based on category with answer analysis"""
     category = get_category_for_question(question_number)
     
@@ -386,50 +278,39 @@ Category focus: {category}
 
 Keep it conversational and welcoming. Only provide the greeting and question, nothing else."""
     
-    # If this is a rephrase after incomplete/off-topic/vague answer
-    if is_rephrase:
-        scenario_messages = {
-            "B": "I appreciate you sharing that, but I noticed you didn't fully address all aspects of the question.",
-            "C": "I notice we went in a different direction than what I was asking about.",
-            "D": "Thank you for that response, but I'd like you to be more specific with concrete examples."
-        }
+    # Handle the response based on analysis
+    if previous_answer_analysis:
+        scenario = previous_answer_analysis.get('scenario')
         
-        acknowledgment = scenario_messages.get(scenario, "Let me rephrase the question.")
-        
-        return f"""The candidate gave an incomplete/off-topic/vague answer to the previous question.
+        if scenario == 'B':  # OFF_TOPIC - totally irrelevant
+            return f"""The candidate gave a totally irrelevant answer that did not address the question at all.
 
 Previous question: {previous_question}
-Scenario: {scenario}
+Analysis: {previous_answer_analysis.get('reasoning')}
 
 Your task:
-1. Start with this acknowledgment: "{acknowledgment}"
-2. Rephrase the SAME question ({category} category) in a clearer, more direct way
-3. Emphasize what specific information you're looking for
-4. Keep it conversational and supportive
+1. Politely but directly state that the answer wasn't what you asked about
+2. Do NOT acknowledge or validate the irrelevant content
+3. Briefly restate what the question was actually asking
+4. Move on to the NEXT question for the {category} category
 
-Do NOT ask the next category question yet. Stay on the same topic but make it clearer what you're asking for.
+Example format:
+"That wasn't quite what I was asking about. My question was about [topic], but let's move forward. [Next question]"
 
-Format: [Acknowledgment] [Rephrased question with clearer guidance]"""
-    
-    # Regular flow - complete answer or second attempt after rephrase
-    return f"""You are conducting an interview. Based on the candidate's response, determine what to do next.
+Be professional but direct. Don't dwell on it - just correct and move on to the next question."""
 
-Previous question asked: {previous_question}
+        else:  # scenario == 'A' - CORRECT_ON_TOPIC (includes right, partially right, or wrong but on-topic)
+            answer_quality = previous_answer_analysis.get('answer_quality', 'good')
+            
+            return f"""The candidate gave an answer that was on-topic and addressed the question.
 
-Current question number: {question_number}
-Category focus: {category}
+Previous question: {previous_question}
+Answer quality: {answer_quality}
+Analysis: {previous_answer_analysis.get('reasoning')}
 
-ANALYZE the candidate's previous response:
-
-If answer is COMPLETE (Scenario A):
-- Give brief positive acknowledgment (1-2 sentences)
-- Move to the next question for {category} category
-
-If answer is still INCOMPLETE/OFF-TOPIC/VAGUE (Scenario B/C/D):
-- Give encouraging acknowledgment of their effort (1 sentence)
-- Briefly note what was missing but don't dwell on it
-- Move forward to the next question for {category} category
-- Maintain a positive, supportive tone
+Your task:
+1. Give a brief, natural acknowledgment of their response (1-2 sentences)
+2. Move to the NEXT question for the {category} category
 
 CRITICAL - ACKNOWLEDGMENT VARIETY:
 You MUST vary your acknowledgment language. NEVER repeat the same phrases. Use different sentence structures each time.
@@ -442,23 +323,15 @@ AVOID OVERUSED PHRASES like:
 - "I'd love to hear more about"
 
 INSTEAD, use varied acknowledgments like:
-For positive responses:
 - "That experience with [specific detail] shows [quality]..."
 - "Your approach to [topic] demonstrates..."
-- "I can see you've thought carefully about..."
+- "I can see you've thought about..."
 - "Interesting point about [specific aspect]..."
 - "That's a solid perspective on..."
-- "You've highlighted an important aspect of..."
-- "Your experience in [area] is relevant here..."
-
-For incomplete/off-topic responses:
-- "I see where you're going, but let's refocus on..."
-- "You've touched on something, though I was asking more about..."
-- "Let me redirect us a bit..."
-- "I notice we've moved away from..."
-- "That's one angle, but I'm curious about..."
-- "I appreciate the effort, though the question was specifically about..."
-- "Let's zero in on a different aspect..."
+- "You've highlighted [something specific]..."
+- "Your take on [area] is noted..."
+- "I see your reasoning there..."
+- "That makes sense given [context]..."
 
 For moving to next question:
 - "Now, let's talk about..."
@@ -468,20 +341,26 @@ For moving to next question:
 - "I'm curious about your thoughts on..."
 - "Consider this situation..."
 - "Let's shift gears..."
+- "On a different note..."
 
 FORMAT YOUR RESPONSE:
-[Brief, VARIED acknowledgment - never use same phrases twice]
+[Brief, VARIED acknowledgment - be natural and conversational]
 [New question for {category} category]
 
 IMPORTANT:
-- Be encouraging and constructive
-- VARY your language - repetition sounds robotic
-- Keep acknowledgments natural and conversational
-- Don't be harsh about incomplete answers
-- Move the interview forward positively
-- Do not mention category names explicitly
+- Keep acknowledgments brief and natural
+- VARY your language - avoid repetition
+- Don't mention category names explicitly
 - For technical categories (3, 6, 8), ask specific detailed questions
-- Make each acknowledgment feel fresh and unique"""
+- Move the interview forward positively"""
+    
+    # Fallback if no analysis (shouldn't happen, but just in case)
+    return f"""Continue the interview by asking the next question for the {category} category.
+
+Current question number: {question_number}
+Category focus: {category}
+
+Ask a thoughtful, varied question that assesses this competency. Do not mention the category name explicitly."""
 
 async def analyze_answer_quality(previous_question: str, candidate_answer: str, interview_type: str) -> dict:
     """
@@ -495,20 +374,22 @@ PREVIOUS QUESTION: {previous_question}
 
 CANDIDATE'S ANSWER: {candidate_answer}
 
-Analyze this answer and classify it into ONE of these scenarios:
+Analyze this answer and classify it into ONE of these THREE scenarios:
 
-A) COMPLETE - Fully answered the question, on-topic, adequate detail
-B) INCOMPLETE - Partially answered, on-topic but missing key aspects
-C) OFF_TOPIC - Did not address the question, went in wrong direction
-D) VAGUE - Answered but too generic, lacks specific examples/details
+A) CORRECT_ON_TOPIC - The answer is relevant and addresses the question (can be right, partially right, or even wrong but still within the context of what was asked)
+B) OFF_TOPIC - The answer is completely irrelevant and does not address what was asked at all
+
+Examples:
+- Question: "How do you handle a difficult patient?" Answer: "I would stay calm and listen to their concerns" → A (on-topic, good answer)
+- Question: "How do you handle a difficult patient?" Answer: "I think patients should always be nice" → A (on-topic but weak/wrong answer)
+- Question: "How do you handle a difficult patient?" Answer: "I like to play tennis on weekends" → B (completely off-topic)
 
 Return ONLY a JSON object in this exact format:
 {{
-    "scenario": "<A, B, C, or D>",
+    "scenario": "<A or B>",
     "reasoning": "<brief 1-sentence explanation>",
-    "missing_aspects": ["<aspect 1>", "<aspect 2>"] or [],
-    "strengths": "<what they did well, if anything>",
-    "needs_follow_up": <true or false>
+    "answer_quality": "<good/weak/wrong/irrelevant>",
+    "is_on_topic": <true or false>
 }}"""
 
         response = openai.chat.completions.create(
@@ -528,13 +409,12 @@ Return ONLY a JSON object in this exact format:
         
     except Exception as e:
         logger.error(f"Error analyzing answer: {str(e)}")
-        # Default to complete if analysis fails
+        # Default to on-topic if analysis fails
         return {
             "scenario": "A",
             "reasoning": "Analysis unavailable",
-            "missing_aspects": [],
-            "strengths": "Response received",
-            "needs_follow_up": False
+            "answer_quality": "unknown",
+            "is_on_topic": True
         }
 
 
@@ -644,7 +524,9 @@ async def start_interview(request: InterviewStartRequest, include_audio: bool = 
 async def generate_question(request: QuestionRequest, include_audio: bool = True):
     """
     Generate next interview question based on conversation history
-    Now includes answer analysis and adaptive questioning
+    Analyzes previous answer and handles three scenarios:
+    1. On-topic answer (right, partially right, or wrong but relevant) - acknowledge and move on
+    2. Off-topic answer (completely irrelevant) - point out and move on
     """
     try:
         logger.info(f"\n📋 QUESTION {request.question_number} | Interview Type: {request.interview_type}")
@@ -661,16 +543,13 @@ async def generate_question(request: QuestionRequest, include_audio: bool = True
         candidate_answer = None
         
         if len(request.conversation_history) >= 2:
-            # Get the last assistant message (previous question)
+            # Get last assistant message (question) and last user message (answer)
             for i in range(len(request.conversation_history) - 1, -1, -1):
-                if request.conversation_history[i].role == "assistant":
+                if request.conversation_history[i].role == "assistant" and previous_question is None:
                     previous_question = request.conversation_history[i].content
-                    break
-            
-            # Get the last user message (candidate's answer)
-            for i in range(len(request.conversation_history) - 1, -1, -1):
-                if request.conversation_history[i].role == "user":
+                if request.conversation_history[i].role == "user" and candidate_answer is None:
                     candidate_answer = request.conversation_history[i].content
+                if previous_question and candidate_answer:
                     break
         
         # Analyze previous answer if available
@@ -679,9 +558,7 @@ async def generate_question(request: QuestionRequest, include_audio: bool = True
             logger.info(f"🔍 Analyzing previous answer...")
             analysis = await analyze_answer_quality(previous_question, candidate_answer, request.interview_type)
             logger.info(f"📊 Analysis Result: Scenario {analysis['scenario']} - {analysis['reasoning']}")
-            
-            if analysis.get('needs_follow_up'):
-                logger.info(f"⚠️  Follow-up needed on previous question")
+            logger.info(f"   Answer Quality: {analysis.get('answer_quality')} | On-topic: {analysis.get('is_on_topic')}")
         
         # Convert conversation history to OpenAI format
         messages = [{"role": "system", "content": system_prompt}]
@@ -692,27 +569,15 @@ async def generate_question(request: QuestionRequest, include_audio: bool = True
                 "content": msg.content
             })
         
-        # Add prompt for next question with analysis context
+        # Create prompt for next question
         is_first = request.question_number == 1
         user_prompt = create_question_prompt(
             request.question_number, 
             request.user_name, 
             is_first,
-            previous_question
+            previous_question,
+            analysis
         )
-        
-        # Add analysis context if available
-        if analysis:
-            analysis_context = f"""
-ANSWER ANALYSIS:
-- Scenario: {analysis['scenario']}
-- Reasoning: {analysis['reasoning']}
-- Missing aspects: {', '.join(analysis['missing_aspects']) if analysis['missing_aspects'] else 'None'}
-- Strengths: {analysis['strengths']}
-- Needs follow-up: {'Yes' if analysis['needs_follow_up'] else 'No'}
-
-Use this analysis to inform your response."""
-            user_prompt = user_prompt + "\n\n" + analysis_context
         
         messages.append({"role": "user", "content": user_prompt})
         
@@ -721,7 +586,7 @@ Use this analysis to inform your response."""
             model="gpt-4o-mini",
             messages=messages,
             temperature=0.7,
-            max_tokens=400  # Increased for potential follow-up questions
+            max_tokens=400
         )
         
         question = response.choices[0].message.content.strip()
@@ -862,19 +727,18 @@ Interview Categories (in order):
 
 Provide your evaluation in the following JSON format:
 {{
-    "overall_score": <number between 1-10>,
-    ""category_scores": {{
-            "Introduction": <score 1-10>,
-            "Clinical Judgement": <score 1-10>,
-            "Technical Knowledge - Clinical Procedures": <score 1-10>,
-            "Ethics, Consent & Communication": <score 1-10>,
-            "Productivity & Efficiency": <score 1-10>,
-            "Technical Knowledge - Advanced Applications": <score 1-10>,
-            "Mentorship & Independence": <score 1-10>,
-            "Technical Knowledge - Diagnosis & Treatment Planning": <score 1-10>,
-            "Fit & Professional Maturity": <score 1-10>,
-            "Insight & Authenticity": <score 1-10>
-    }},
+    "overall_score": <number between 5-10>,
+    "category_scores": {{
+        "Introduction": <score 5-10>,
+        "Clinical Judgement": <score 5-10>,
+        "Technical Knowledge - Clinical Procedures": <score 5-10>,
+        "Ethics, Consent & Communication": <score 5-10>,
+        "Productivity & Efficiency": <score 5-10>,
+        "Technical Knowledge - Advanced Applications": <score 5-10>,
+        "Mentorship & Independence": <score 5-10>,
+        "Technical Knowledge - Diagnosis & Treatment Planning": <score 5-10>,
+        "Fit & Professional Maturity": <score 5-10>,
+        "Insight & Authenticity": <score 5-10>
     }},
     "strengths": [
         "<specific strength 1>",
@@ -898,14 +762,21 @@ Guidelines for evaluation:
 - Provide actionable suggestions for improvement
 - Be encouraging while maintaining professional standards
 
-SCORING SCALE (be lenient and encouraging):
-- 5-6: Basic effort shown, participated in interview
-- 7-8: Good responses with relevant examples (MOST CANDIDATES should score here)
-- 9-10: Exceptional depth, insight, and professionalism
-- Overall scores below 6 should be RARE and only for severely inadequate responses
-- Default to 7-8 range for anyone making genuine effort
-- Give credit for attempting to answer even if not perfect
-- This is practice, so score to encourage improvement, not discourage
+SIMPLIFIED SCORING SCALE (5-10, very lenient and encouraging):
+- 5.0-6.0: Participated and made an effort, basic responses provided
+- 6.5-7.0: Decent effort with some relevant information shared
+- 7.5-8.0: Good responses with relevant examples (DEFAULT for most candidates)
+- 8.5-9.0: Strong performance with detailed, thoughtful answers
+- 9.5-10.0: Exceptional - outstanding depth, insight, and professionalism
+
+SCORING GUIDELINES:
+- START at 6.5 as the baseline for anyone who participated genuinely
+- Only go below 7.0 if responses were consistently very brief or off-topic
+- Score 8+ for solid, well-articulated answers with examples
+- Score 9+ for truly impressive, detailed responses showing expertise
+- This is PRACTICE, so be generous and encouraging
+- Give credit for effort and engagement
+- Focus on growth potential in feedback, not harsh criticism
 
 Return ONLY the JSON object, no additional text."""
 

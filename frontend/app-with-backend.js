@@ -17,7 +17,8 @@ const state = {
     audioUrl: null,
     mediaRecorder: null,
     audioChunks: [],
-    evaluationResults: null
+    evaluationResults: null,
+    recordingStartTime: null
 };
 
 // Configuration
@@ -263,6 +264,7 @@ function playAudio(url) {
         elements.questionAudio.play();
         state.isPlaying = true;
         updateQuestionDisplay();
+        updateRecordingControls();
     }
 }
 
@@ -277,6 +279,7 @@ function handleAudioEnded() {
 function replayQuestion() {
     if (state.audioUrl) {
         playAudio(state.audioUrl);
+        updateRecordingControls();
     }
 }
 
@@ -287,6 +290,7 @@ async function startRecording() {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         state.mediaRecorder = new MediaRecorder(stream);
         state.audioChunks = [];
+        state.recordingStartTime = Date.now();  // ADD THIS LINE - Track start time
         
         state.mediaRecorder.ondataavailable = (event) => {
             state.audioChunks.push(event.data);
@@ -294,6 +298,32 @@ async function startRecording() {
         
         state.mediaRecorder.onstop = async () => {
             console.log('Recording stopped, creating audio blob...');
+            
+            // ADD THIS BLOCK - Check minimum recording duration
+            const recordingDuration = (Date.now() - state.recordingStartTime) / 1000; // in seconds
+            console.log('Recording duration:', recordingDuration, 'seconds');
+            
+            if (recordingDuration < 3) {
+                console.log('Recording too short, discarding...');
+                stream.getTracks().forEach(track => track.stop());
+                state.audioChunks = [];
+                state.isProcessingAnswer = false;
+                updateRecordingControls();
+                
+                // Show a brief message to user
+                const tempMessage = document.createElement('div');
+                tempMessage.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #ef4444; color: white; padding: 1rem 2rem; border-radius: 0.5rem; font-weight: 600; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1);';
+                tempMessage.textContent = 'Recording too short! Please speak for at least 3 seconds.';
+                document.body.appendChild(tempMessage);
+                
+                setTimeout(() => {
+                    document.body.removeChild(tempMessage);
+                }, 2500);
+                
+                return;
+            }
+            // END OF ADDED BLOCK
+            
             const audioBlob = new Blob(state.audioChunks, { type: 'audio/wav' });
             stream.getTracks().forEach(track => track.stop());
             await transcribeAudio(audioBlob);
