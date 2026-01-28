@@ -174,6 +174,7 @@ function resetState() {
 async function generateFirstQuestion() {
     state.isGeneratingQuestion = true;
     updateQuestionDisplay(); // Display question placeholder immediately
+    updateRecordingControls(); // Update controls to show disabled state
     
     try {
         console.log('Requesting first question from API...');
@@ -205,6 +206,7 @@ async function generateFirstQuestion() {
         
         updateProgress();
         updateQuestionDisplay(); // This updates the UI with the question text immediately
+        updateRecordingControls(); // Update controls now that question is ready
         
         // Handle audio if available, without blocking the question display
         if (data.audio_base64) {
@@ -221,6 +223,7 @@ async function generateFirstQuestion() {
         state.currentQuestion = 'Error generating question. Please refresh and try again.';
         state.isGeneratingQuestion = false;
         updateQuestionDisplay();
+        updateRecordingControls();
         alert('Failed to start interview. Please check your connection and try again.');
     }
 }
@@ -290,7 +293,7 @@ async function startRecording() {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         state.mediaRecorder = new MediaRecorder(stream);
         state.audioChunks = [];
-        state.recordingStartTime = Date.now();  // ADD THIS LINE - Track start time
+        state.recordingStartTime = Date.now();  // Track start time
         
         state.mediaRecorder.ondataavailable = (event) => {
             state.audioChunks.push(event.data);
@@ -299,7 +302,7 @@ async function startRecording() {
         state.mediaRecorder.onstop = async () => {
             console.log('Recording stopped, creating audio blob...');
             
-            // ADD THIS BLOCK - Check minimum recording duration
+            // Check minimum recording duration
             const recordingDuration = (Date.now() - state.recordingStartTime) / 1000; // in seconds
             console.log('Recording duration:', recordingDuration, 'seconds');
             
@@ -322,7 +325,6 @@ async function startRecording() {
                 
                 return;
             }
-            // END OF ADDED BLOCK
             
             const audioBlob = new Blob(state.audioChunks, { type: 'audio/wav' });
             stream.getTracks().forEach(track => track.stop());
@@ -407,7 +409,8 @@ async function transcribeAudio(audioBlob) {
 
 async function generateNextQuestion(history) {
     state.isGeneratingQuestion = true;
-    updateQuestionDisplay(); // Display the next question immediately
+    updateQuestionDisplay(); // Display the next question placeholder immediately
+    updateRecordingControls(); // Disable recording controls
     
     try {
         const nextQuestionNumber = state.questionNumber + 1;
@@ -445,6 +448,7 @@ async function generateNextQuestion(history) {
         
         updateProgress();
         updateQuestionDisplay(); // Updates the UI with the next question text immediately
+        updateRecordingControls(); // Enable recording controls now that question is ready
         
         // Handle audio if available, without blocking the question display
         if (data.audio_base64) {
@@ -460,6 +464,7 @@ async function generateNextQuestion(history) {
         console.error('Error generating next question:', error);
         state.isGeneratingQuestion = false;
         updateQuestionDisplay();
+        updateRecordingControls();
         alert('Error generating next question. Please try again.');
     }
 }
@@ -752,13 +757,13 @@ function updateQuestionDisplay() {
 
 
 function updateRecordingControls() {
-    const canRecord = !state.isGeneratingQuestion && 
-                     !state.isGeneratingAudio && 
-                     !state.isPlaying && 
-                     !state.isProcessingAnswer;
-    
+    const canRecord = !state.isGeneratingQuestion &&
+                       !state.isGeneratingAudio &&
+                       !state.isPlaying &&
+                       !state.isProcessingAnswer;
+
     let html = '';
-    
+
     if (state.isProcessingAnswer) {
         html = `
             <div>
@@ -767,15 +772,21 @@ function updateRecordingControls() {
             </div>
         `;
     } else {
-        const statusText = !canRecord 
-            ? "Please wait for the question to finish playing..."
-            : state.isRecording 
-                ? "Recording your answer... Click to stop"
-                : "Click the microphone to record your answer";
-        
+        // Improved status text to show appropriate message for each state
+        let statusText;
+        if (state.isGeneratingQuestion) {
+            statusText = "Please wait while the question is being generated...";
+        } else if (state.isGeneratingAudio || state.isPlaying) {
+            statusText = "Please wait for the question to finish playing...";
+        } else if (state.isRecording) {
+            statusText = "Recording your answer... Click to stop";
+        } else {
+            statusText = "Click the microphone to record your answer";
+        }
+
         html = `
             <p class="text-lg text-slate-600 mb-6">${statusText}</p>
-            <button 
+            <button
                 onclick="${state.isRecording ? 'stopRecording()' : 'startRecording()'}"
                 ${!canRecord && !state.isRecording ? 'disabled' : ''}
                 class="recording-btn ${state.isRecording ? 'recording' : canRecord ? 'idle' : 'disabled'}"
@@ -790,15 +801,16 @@ function updateRecordingControls() {
             ` : ''}
         `;
     }
-    
+
     elements.recordingControls.innerHTML = html;
-    
+
     setTimeout(() => {
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
     }, 10);
 }
+
 
 // Initialize the app when DOM is ready
 if (document.readyState === 'loading') {

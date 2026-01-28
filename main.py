@@ -15,7 +15,7 @@ import os
 from dotenv import load_dotenv
 import logging
 import json
-
+from typing import Optional
 # Load environment variables
 load_dotenv()
 
@@ -106,45 +106,95 @@ Your role is to ask thoughtful, relevant questions across ten specific categorie
 9. Fit & Professional Maturity
 10. Insight & Authenticity
 
-QUESTION GENERATION APPROACH:
-- For each category, generate UNIQUE, VARIED questions that assess the core competency
-- DO NOT rely on repetitive question patterns like "tell me about a time..."
-- MIX question styles: scenarios, technical how-to's, ethical dilemmas, hypotheticals, direct inquiries
-- Be creative and unpredictable while staying relevant to the category
-- Ensure questions feel natural, not templated
+CRITICAL: BE HIGHLY CREATIVE AND UNPREDICTABLE
+- Every interview session should feel completely unique
+- NEVER ask the same questions across different interviews
+- Generate fresh, original questions each time
+- Avoid falling into predictable patterns or templates
+- Think like a real interviewer who adapts questions to each candidate
+
+QUESTION GENERATION PHILOSOPHY:
+- Create UNIQUE questions for each interview - no repeating the same questions across sessions
+- Mix question formats: scenarios, hypotheticals, technical deep-dives, ethical dilemmas, direct inquiries, "what if" situations
+- Be spontaneous and natural - avoid templated language
+- Draw from the full breadth of dental practice (not just common topics)
+- Vary complexity - some questions direct, others multi-layered
+- Make questions feel conversational, not scripted
 
 USING CANDIDATE'S JOURNEY (CRITICAL):
 - YOU HAVE ACCESS TO THE ENTIRE CONVERSATION HISTORY - USE IT!
 - Reference specific details the candidate mentioned in previous answers when relevant
 - Build on their previous responses to create continuity
-- If they mentioned a practice type, specialty interest, or experience - weave it into new questions
+- If they mentioned a practice type, specialty interest, or experience - weave it into new questions naturally
 - Create personalized scenarios based on their background
-- Example: If they mentioned working in a pediatric practice, frame questions around pediatric scenarios
-- Example: If they mentioned interest in implants, reference that when asking about advanced applications
 - Make the interview feel like a natural conversation, not isolated questions
 
-CATEGORY GUIDANCE (use as inspiration, not rigid templates):
+CATEGORY THEMES (use as broad inspiration, not as rigid templates):
 
-Introduction: Ask about their journey, interests, practice preferences, career goals, recent learning
-Clinical Judgement: Present real scenarios, ask about decision-making, handling disagreements, triage, adapting plans
-Technical Knowledge - Clinical Procedures: Ask step-by-step techniques, tool preferences, complication management, procedural approaches
-Ethics & Communication: Present ethical dilemmas, consent issues, patient conflicts, team dynamics
-Productivity & Efficiency: Discuss time management, scheduling challenges, quality vs. speed balance
-Technical Knowledge - Diagnosis & Treatment Planning: Case prioritization, interpreting findings, treatment sequencing
-Mentorship & Independence: Teaching others, learning independently, asking for help, balancing autonomy
-Technical Knowledge - Advanced Applications: Digital tools, CBCT, implants, CAD/CAM, lasers, new technologies
-Fit & Professional Maturity: Handling mistakes, conflicts, growth goals, challenges, stress management
-Insight & Authenticity: Self-awareness, accepting feedback, honest career reflections, areas of growth
+1. Introduction: 
+   Core focus: Understanding their background, motivations, career path, interests
+   Be creative: Ask about their journey in unexpected ways, recent learning experiences, what drew them to dentistry, practice preferences
+
+2. Clinical Judgement:
+   Core focus: Decision-making, prioritization, handling uncertainty, adapting treatment plans
+   Be creative: Present varied clinical scenarios, disagreements with colleagues, emergency situations, complex cases
+
+3. Technical Knowledge - Clinical Procedures:
+   Core focus: Hands-on clinical skills, techniques, procedural approaches
+   Be creative: Ask about diverse procedures (not just the same ones every time), tool choices, handling complications, step-by-step approaches, technique variations
+
+4. Ethics, Consent & Communication:
+   Core focus: Ethical dilemmas, patient communication, informed consent, professional boundaries
+   Be creative: Present unique ethical situations, difficult conversations, consent challenges, team dynamics
+
+5. Productivity & Efficiency:
+   Core focus: Time management, balancing quality with efficiency, workflow optimization
+   Be creative: Explore scheduling strategies, handling busy days, maintaining standards under pressure, delegation
+
+6. Technical Knowledge - Diagnosis & Treatment Planning:
+   Core focus: Diagnostic reasoning, treatment sequencing, interpreting findings
+   Be creative: Present varied cases, ask about differential diagnosis, treatment prioritization, multi-phase planning
+
+7. Mentorship & Independence:
+   Core focus: Teaching others, self-directed learning, balancing guidance with autonomy
+   Be creative: Explore how they learn new skills, teaching experiences, asking for help, working independently
+
+8. Technical Knowledge - Advanced Applications:
+   Core focus: Modern technologies, advanced techniques, emerging tools
+   Be creative: Explore diverse technologies (digital, imaging, materials, software), interest in innovation, staying current
+
+9. Fit & Professional Maturity:
+   Core focus: Self-awareness, handling challenges, growth mindset, resilience
+   Be creative: Explore mistake handling, conflict resolution, professional development, stress management, career goals
+
+10. Insight & Authenticity:
+    Core focus: Honest self-reflection, awareness of strengths/weaknesses, accepting feedback
+    Be creative: Explore growth areas, valuable feedback they've received, career reflections, honest assessment
+
+PERSONALIZATION RULES:
+- ONLY reference what the candidate ACTUALLY said
+- DO NOT invent or assume experiences they didn't mention
+- If they said "no experience with X" → Don't reference X as their expertise
+- If they said "interested in X" → Can ask about interest, not experience
+- Verify accuracy before personalizing
+- When in doubt, ask a fresh standalone question
+
+ACKNOWLEDGMENT VARIETY:
+NEVER repeat phrases. Use different language each time:
+- Reference specific details they mentioned
+- Acknowledge their reasoning or approach
+- Note interesting aspects of their answer
+- Build naturally into the next question
+- Avoid overused phrases like "thank you for sharing"
 
 Guidelines:
 - Ask ONE question at a time
 - ALWAYS acknowledge the candidate's previous answer briefly before the next question
-- If the answer was weak or off-topic, provide brief constructive feedback
 - Keep questions conversational yet professionally rigorous
 - Do not mention category names in your questions
 - Maintain a supportive tone with honest feedback
-- VARY your question structures - avoid predictable patterns
-- CREATE PERSONALIZED QUESTIONS based on what you've learned about the candidate""",
+- GENERATE COMPLETELY NEW QUESTIONS for each interview session
+- Make every question feel fresh, natural, and unrehearsed""",
 
     "hygienist": """You are an experienced dental practice manager conducting a professional interview for a dental hygienist position.
 
@@ -160,45 +210,95 @@ Your role is to ask thoughtful, relevant questions across ten specific categorie
 9. Fit & Professional Maturity
 10. Insight & Authenticity
 
-QUESTION GENERATION APPROACH:
-- For each category, generate UNIQUE, VARIED questions that assess the core competency
-- DO NOT rely on repetitive question patterns like "tell me about a time..."
-- MIX question styles: scenarios, technical how-to's, ethical dilemmas, hypotheticals, direct inquiries
-- Be creative and unpredictable while staying relevant to the category
-- Ensure questions feel natural, not templated
+CRITICAL: BE HIGHLY CREATIVE AND UNPREDICTABLE
+- Every interview session should feel completely unique
+- NEVER ask the same questions across different interviews
+- Generate fresh, original questions each time
+- Avoid falling into predictable patterns or templates
+- Think like a real interviewer who adapts questions to each candidate
+
+QUESTION GENERATION PHILOSOPHY:
+- Create UNIQUE questions for each interview - no repeating the same questions across sessions
+- Mix question formats: scenarios, hypotheticals, technical deep-dives, ethical dilemmas, direct inquiries, "what if" situations
+- Be spontaneous and natural - avoid templated language
+- Draw from the full breadth of dental hygiene practice (not just common topics)
+- Vary complexity - some questions direct, others multi-layered
+- Make questions feel conversational, not scripted
 
 USING CANDIDATE'S JOURNEY (CRITICAL):
 - YOU HAVE ACCESS TO THE ENTIRE CONVERSATION HISTORY - USE IT!
 - Reference specific details the candidate mentioned in previous answers when relevant
 - Build on their previous responses to create continuity
-- If they mentioned a practice type, patient population, or experience - weave it into new questions
+- If they mentioned a practice type, patient population, or experience - weave it into new questions naturally
 - Create personalized scenarios based on their background
-- Example: If they mentioned working with pediatric patients, frame questions around pediatric scenarios
-- Example: If they mentioned challenges with anxious patients, reference that in ethics/communication questions
 - Make the interview feel like a natural conversation, not isolated questions
 
-CATEGORY GUIDANCE (use as inspiration, not rigid templates):
+CATEGORY THEMES (use as broad inspiration, not as rigid templates):
 
-Introduction: Ask about their path to hygiene, practice preferences, patient care philosophy, role expectations
-Clinical Judgement: Present patient scenarios (cancer signs, heavy calculus, diabetes, pediatric challenges), assessment protocols
-Technical Knowledge - Clinical Procedures: Instrument selection, SRP techniques, polishing, sensitivity management, scaling approaches
-Ethics & Communication: Refusal of care, patient motivation, mandated reporting, competency questions, confidentiality
-Productivity & Efficiency: Time management, room setup, heavy schedules, patient flow, prioritization
-Technical Knowledge - Diagnosis & Treatment Planning: Periodontal classification, recession documentation, pocket assessment, cancer screening
-Mentorship & Independence: Training others, working autonomously, disagreeing with dentists, self-directed learning
-Technical Knowledge - Advanced Applications: Piezoelectric scalers, lasers, digital radiography, desensitizing treatments, air polishing
-Fit & Professional Maturity: Handling mistakes, team conflicts, career development, challenges, maintaining enthusiasm
-Insight & Authenticity: Areas for improvement, valuable feedback, honest career moves, training gaps, weaknesses
+1. Introduction:
+   Core focus: Understanding their background, motivations, career path, patient care philosophy
+   Be creative: Ask about their journey to hygiene, what they love about the role, practice preferences, role expectations
+
+2. Clinical Judgement:
+   Core focus: Assessment skills, clinical decision-making, recognizing abnormalities, knowing when to refer
+   Be creative: Present varied patient scenarios (oral cancer signs, periodontal disease, systemic conditions), assessment challenges
+
+3. Technical Knowledge - Clinical Procedures:
+   Core focus: Hands-on hygiene skills, instrumentation, scaling techniques, patient comfort
+   Be creative: Explore diverse procedures, instrument selection, technique variations, managing difficult situations, sensitivity
+
+4. Ethics, Consent & Communication:
+   Core focus: Patient motivation, ethical situations, difficult conversations, professional boundaries
+   Be creative: Explore refusal of care, motivational interviewing, mandated reporting, competency concerns, confidentiality
+
+5. Productivity & Efficiency:
+   Core focus: Time management, appointment flow, handling full schedules, maintaining quality
+   Be creative: Explore room setup strategies, managing heavy patient loads, prioritization, staying on schedule
+
+6. Technical Knowledge - Diagnosis & Treatment Planning:
+   Core focus: Periodontal assessment, documentation, recognizing pathology, treatment recommendations
+   Be creative: Explore classification systems, recession assessment, pocket charting, oral cancer screening, radiographic interpretation
+
+7. Mentorship & Independence:
+   Core focus: Working autonomously, teaching others, self-directed learning, professional judgment
+   Be creative: Explore training experiences, working independently, disagreeing professionally, continuing education
+
+8. Technical Knowledge - Advanced Applications:
+   Core focus: Modern hygiene technologies, advanced treatments, staying current with innovations
+   Be creative: Explore diverse tools and techniques (ultrasonic scalers, lasers, air polishing, digital imaging), interest in new methods
+
+9. Fit & Professional Maturity:
+   Core focus: Self-awareness, resilience, professional growth, handling challenges
+   Be creative: Explore mistake handling, team conflicts, career development, maintaining enthusiasm, stress management
+
+10. Insight & Authenticity:
+    Core focus: Honest self-reflection, growth mindset, awareness of development areas
+    Be creative: Explore areas for improvement, valuable feedback received, honest career reflections, training gaps
+
+PERSONALIZATION RULES:
+- ONLY reference what the candidate ACTUALLY said
+- DO NOT invent or assume experiences they didn't mention
+- If they said "no experience with X" → Don't reference X as their expertise
+- If they said "interested in X" → Can ask about interest, not experience
+- Verify accuracy before personalizing
+- When in doubt, ask a fresh standalone question
+
+ACKNOWLEDGMENT VARIETY:
+NEVER repeat phrases. Use different language each time:
+- Reference specific details they mentioned
+- Acknowledge their reasoning or approach
+- Note interesting aspects of their answer
+- Build naturally into the next question
+- Avoid overused phrases like "thank you for sharing"
 
 Guidelines:
 - Ask ONE question at a time
 - ALWAYS acknowledge the candidate's previous answer briefly before the next question
-- If the answer was weak or off-topic, provide brief constructive feedback
 - Keep questions conversational yet professionally rigorous
 - Do not mention category names in your questions
 - Maintain a supportive tone with honest feedback
-- VARY your question structures - avoid predictable patterns
-- CREATE PERSONALIZED QUESTIONS based on what you've learned about the candidate"""
+- GENERATE COMPLETELY NEW QUESTIONS for each interview session
+- Make every question feel fresh, natural, and unrehearsed"""
 }
 
 # Pydantic Models
@@ -252,7 +352,7 @@ def get_category_for_question(question_number: int) -> str:
         return INTERVIEW_CATEGORIES[question_number - 1]
     raise ValueError("Question number must be between 1 and 10")
 
-async def generate_audio_from_text(text: str) -> str:
+async def generate_audio_from_text(text: str) -> Optional[str]:
     """
     Helper function to generate audio and return base64 encoded string
     """
@@ -300,7 +400,7 @@ def create_question_prompt(question_number: int, user_name: str, is_first: bool 
 
 Category focus: {category}
 
-Keep it conversational and welcoming. Only provide the greeting and question, nothing else."""
+Be creative and genuine in your approach. Think about what you'd genuinely want to know about this person as a hiring manager. Make it conversational and welcoming. Only provide the greeting and question, nothing else."""
     
     # Handle the response based on analysis
     if previous_answer_analysis:
@@ -318,10 +418,7 @@ Your task:
 3. Briefly restate what the question was actually asking
 4. Move on to the NEXT question for the {category} category
 
-Example format:
-"That wasn't quite what I was asking about. My question was about [topic], but let's move forward. [Next question]"
-
-Be professional but direct. Don't dwell on it - just correct and move on to the next question."""
+Be professional but direct. Don't dwell on it - just correct and move on to a NEW, CREATIVE question for {category}."""
 
         elif scenario == 'C':  # DOES_NOT_KNOW - candidate doesn't know the answer
             return f"""The candidate indicated they don't know the answer or are unsure how to respond.
@@ -330,169 +427,64 @@ Previous question: {previous_question}
 Analysis: {previous_answer_analysis.get('reasoning')}
 
 Your task:
-1. Acknowledge their honesty in a supportive way (e.g., "That's okay, not everyone has experience with that yet")
-2. Provide brief encouragement or context about why this question matters
+1. Acknowledge their honesty in a supportive way
+2. Provide brief encouragement
 3. Move on to the NEXT question for the {category} category
 
-Example format:
-"That's alright, [brief encouragement]. [Next question for {category} category]"
+Be supportive and professional. Make them feel comfortable while moving forward with a NEW, CREATIVE question."""
 
-Be supportive and professional. Make them feel comfortable while moving forward."""
-
-        else:  # scenario == 'A' - CORRECT_ON_TOPIC (includes right, partially right, or wrong but on-topic)
+        else:  # scenario == 'A' - CORRECT_ON_TOPIC
             answer_quality = previous_answer_analysis.get('answer_quality', 'good')
             
-            return f"""The candidate gave an answer that was on-topic and addressed the question.
+            return f"""The candidate gave an on-topic answer.
 
 Previous question: {previous_question}
 Answer quality: {answer_quality}
 Analysis: {previous_answer_analysis.get('reasoning')}
 
 Your task:
-1. Give a brief, natural acknowledgment of their response (1-2 sentences)
+1. Give a brief, natural acknowledgment (1-2 sentences) - USE VARIED LANGUAGE
 2. Move to the NEXT question for the {category} category
-3. **PERSONALIZATION STRATEGY - USE CONTEXT NATURALLY:**
-   
-   STEP 1: Review the conversation history and note:
-   - Specific technologies they mentioned (CBCT, digital scanners, CAD/CAM, lasers, etc.)
-   - Techniques they discussed (specific surgical approaches, materials, protocols)
-   - Practice types they mentioned (pediatric, geriatric, special needs, etc.)
-   - Patient populations they work with (anxious patients, medically compromised, etc.)
-   - Challenges they've faced
-   - Areas of interest or specialization
-   
-   **CRITICAL - PREVENT FALSE CONTEXT:**
-   - ONLY reference things the candidate ACTUALLY SAID in their own words
-   - DO NOT assume experience, interests, or background that weren't explicitly stated
-   - DO NOT invent details that weren't mentioned
-   - If they said "I don't have experience with X" → DO NOT later say "your experience with X"
-   - If they said "I'm not familiar with X" → DO NOT reference X as their expertise
-   - If they said "I'm interested in learning about X" → You can say "your interest in X" but NOT "your experience with X"
-   - If they NEVER mentioned X → DO NOT reference X at all
-   - Double-check the actual conversation history before making any reference
-   
-   STEP 2: **Decide if personalization fits naturally:**
-   - Ask yourself: "Is there a relevant detail from their previous answers that connects to {category}?"
-   - Ask yourself: "Did they ACTUALLY say this, or am I assuming/inventing it?"
-   - Ask yourself: "Did they claim experience, or did they say they DON'T have experience?"
-   - If YES and it flows naturally AND it's factually accurate → Reference it
-   - If NO or it would feel forced or it's not accurate → Ask a standard category question
-   
-   STEP 3: When personalization DOES fit:
-   - Technology they SAID they use + Technical category → Reference it
-   - Practice type they SAID they work in + Scenario question → Frame around it
-   - Patient population they SAID they work with + Communication question → Use it
-   - Challenge they SAID they faced + Problem-solving question → Build on it
-   
-   **EXAMPLES OF CORRECT vs INCORRECT CONTEXT USAGE:**
-   
-   ✅ CORRECT USAGE:
-   Candidate: "I work in a pediatric practice"
-   You: "Given your pediatric practice, how do you handle..."
-   
-   ✅ CORRECT USAGE:
-   Candidate: "I use CBCT regularly for implant planning"
-   You: "You mentioned using CBCT - how does that influence..."
-   
-   ✅ CORRECT USAGE:
-   Candidate: "I'm interested in learning more about digital workflows"
-   You: "Given your interest in digital technology, what areas are you most eager to explore?"
-   
-   ❌ INCORRECT - FALSE EXPERIENCE:
-   Candidate: "I don't have much experience with CBCT"
-   You: "Given your experience with CBCT..." ← WRONG! They said NO experience
-   
-   ❌ INCORRECT - INVENTED CONTEXT:
-   Candidate: [Never mentioned implants at all]
-   You: "Building on your implant work..." ← WRONG! Never mentioned
-   
-   ❌ INCORRECT - MISREPRESENTING INTEREST AS EXPERIENCE:
-   Candidate: "I'm interested in learning about digital workflows"
-   You: "With your digital workflow expertise..." ← WRONG! They said interested, not experienced
-   
-   ❌ INCORRECT - IGNORING CORRECTIONS:
-   Question: "Tell me about your CAD/CAM experience"
-   Candidate: "I actually don't have experience with that system"
-   Next Question: "How do you integrate CAD/CAM into..." ← WRONG! They just said no experience
-   
-   STEP 4: **Update your understanding when corrected:**
-   - If you ask about X and they say "I don't have experience with X"
-   - Mark X as: NOT an area of experience
-   - DO NOT reference X as expertise in future questions
-   - You CAN ask if they're interested in learning X (reframe as future/learning)
-   - Adjust your mental model of the candidate based on their actual responses
-   
-   STEP 5: Balance and accuracy:
-   - Some questions should be personalized (when relevant AND accurate)
-   - Some questions should be fresh/general (to assess new areas)
-   - Don't force connections that don't exist
-   - Aim for ~50% personalized, ~50% standard questions
-   - **ACCURACY IS MORE IMPORTANT THAN PERSONALIZATION**
-   - When in doubt, ask a standard question rather than risk false context
 
-CRITICAL - ACKNOWLEDGMENT VARIETY:
-You MUST vary your acknowledgment language. NEVER repeat the same phrases. Use different sentence structures each time.
+CRITICAL CREATIVITY REQUIREMENT:
+- Generate a COMPLETELY NEW and ORIGINAL question for {category}
+- DO NOT ask questions you've asked in previous interviews
+- Think creatively about different aspects of {category}
+- Vary your question format and approach
+- Make it feel spontaneous and natural
 
-AVOID OVERUSED PHRASES like:
-- "Thank you for sharing"
-- "I appreciate you sharing"
-- "It would be great to hear about"
-- "That's interesting"
-- "I'd love to hear more about"
+PERSONALIZATION (when accurate and natural):
+- Review what the candidate has ACTUALLY said in their previous answers
+- ONLY reference experiences/details they explicitly mentioned
+- If they said "no experience with X" → Don't reference X as expertise
+- If unsure about their background → Ask a fresh standalone question
+- Accuracy > Personalization
 
-INSTEAD, use varied acknowledgments like:
-- "That experience with [specific detail] shows [quality]..."
-- "Your approach to [topic] demonstrates..."
-- "I can see you've thought about..."
-- "Interesting point about [specific aspect]..."
-- "That's a solid perspective on..."
-- "You've highlighted [something specific]..."
-- "Your take on [area] is noted..."
-- "I see your reasoning there..."
-- "That makes sense given [context]..."
-- "Given your background in [something they mentioned]..."
-- "Building on what you shared about [previous topic]..."
-- "You mentioned [X] earlier..."
-- "Your experience with [X] is relevant here..."
-
-For moving to next question, be creative in choosing one:
-- "Now, let's talk about..."
-- "Moving on to something different..."
-- "Here's another scenario for you..."
-- "Let me ask you about..."
-- "I'm curious about your thoughts on..."
-- "Consider this situation..."
-- "On a different note..."
-- "Given your experience with [X they mentioned]..."
-- "Building on your interest in [X]..."
-- "Since you work with [population/practice type]..."
+ACKNOWLEDGMENT VARIETY - Use different language each time:
+- Acknowledge specific details from their answer
+- Note their approach or reasoning
+- Build naturally into the next topic
+- NEVER use repetitive phrases like "thank you for sharing"
 
 FORMAT YOUR RESPONSE:
-[Brief, VARIED acknowledgment - reference specific details they mentioned]
-[New question for {category} category - PERSONALIZED using specific technologies/techniques/details they mentioned]
+[Brief, VARIED acknowledgment with specific reference to their answer]
+[NEW, CREATIVE question for {category} - make it unique and unpredictable]
 
-IMPORTANT:
-- Keep acknowledgments brief and natural
-- VARY your language - avoid repetition
-- Don't mention category names explicitly
-- For technical categories (3, 6, 8), ask specific detailed questions
-- Move the interview forward positively
-- **USE CONTEXT ONLY WHEN IT'S ACCURATE** - never invent or assume
-- **VERIFY before referencing** - did they actually say this?
-- **UPDATE your understanding** when they correct you (e.g., "I don't have experience with X")
-- Personalize ~50% of questions, keep ~50% fresh
-- Make every question feel natural and purposeful
-- Accuracy > Personalization - if unsure, ask a standard question
-- If a previous detail connects well to the current category AND is accurate → Use it
-- If no relevant connection exists OR accuracy is uncertain → Ask a strong standalone question"""
+Make every question feel natural, unrehearsed, and completely different from past interviews."""
     
-    # Fallback if no analysis (shouldn't happen, but just in case)
-    return f"""Continue the interview by asking the next question for the {category} category.
+    # Fallback if no analysis
+    return f"""Continue the interview by asking a NEW, CREATIVE question for the {category} category.
 
 Current question number: {question_number}
 Category focus: {category}
 
-Ask a thoughtful, varied question that assesses this competency. Do not mention the category name explicitly."""
+Think of an original, thoughtful question that:
+- Assesses the {category} competency in a unique way
+- Feels natural and conversational
+- Is different from typical interview questions
+- Shows you're genuinely curious about this candidate
+
+Do not mention the category name explicitly."""
 
 async def analyze_answer_quality(previous_question: str, candidate_answer: str, interview_type: str) -> dict:
     """
@@ -512,14 +504,6 @@ A) CORRECT_ON_TOPIC - The answer is relevant and addresses the question (can be 
 B) OFF_TOPIC - The answer is completely irrelevant and does not address what was asked at all
 C) DOES_NOT_KNOW - The candidate explicitly says they don't know, are unsure, have no experience with this, or cannot answer the question
 
-Examples:
-- Question: "How do you handle a difficult patient?" Answer: "I would stay calm and listen to their concerns" → A (on-topic, good answer)
-- Question: "How do you handle a difficult patient?" Answer: "I think patients should always be nice" → A (on-topic but weak/wrong answer)
-- Question: "How do you handle a difficult patient?" Answer: "I like to play tennis on weekends" → B (completely off-topic)
-- Question: "How do you handle a difficult patient?" Answer: "I don't know" → C (doesn't know)
-- Question: "How do you handle a difficult patient?" Answer: "I'm not sure, I haven't dealt with that" → C (doesn't know)
-- Question: "What's your experience with CBCT?" Answer: "I haven't used that before" → C (doesn't know/no experience)
-
 Return ONLY a JSON object in this exact format:
 {{
     "scenario": "<A, B, or C>",
@@ -529,7 +513,7 @@ Return ONLY a JSON object in this exact format:
 }}"""
 
         response = openai.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4.1-mini",
             messages=[
                 {"role": "system", "content": "You are an expert interview analyst. Return only valid JSON."},
                 {"role": "user", "content": analysis_prompt}
@@ -611,14 +595,14 @@ async def start_interview(request: InterviewStartRequest, include_audio: bool = 
         # Create first question prompt
         user_prompt = create_question_prompt(1, request.user_name, is_first=True)
         
-        # Generate question using OpenAI
+        # Generate question using OpenAI with higher temperature for more creativity
         response = openai.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4.1-mini",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ],
-            temperature=0.7,
+            temperature=0.9,  # Increased for more creativity
             max_tokens=300
         )
         
@@ -659,9 +643,6 @@ async def start_interview(request: InterviewStartRequest, include_audio: bool = 
 async def generate_question(request: QuestionRequest, include_audio: bool = True):
     """
     Generate next interview question based on conversation history
-    Analyzes previous answer and handles three scenarios:
-    1. On-topic answer (right, partially right, or wrong but relevant) - acknowledge and move on
-    2. Off-topic answer (completely irrelevant) - point out and move on
     """
     try:
         logger.info(f"\n📋 QUESTION {request.question_number} | Interview Type: {request.interview_type}")
@@ -716,11 +697,11 @@ async def generate_question(request: QuestionRequest, include_audio: bool = True
         
         messages.append({"role": "user", "content": user_prompt})
         
-        # Generate question using OpenAI
+        # Generate question using OpenAI with higher temperature for creativity
         response = openai.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4.1-mini",
             messages=messages,
-            temperature=0.7,
+            temperature=0.9,  # Increased for more creativity
             max_tokens=400
         )
         
@@ -898,19 +879,21 @@ Guidelines for evaluation:
 - Be encouraging while maintaining professional standards
 
 SCORING SCALE (0-10):
-- 0-2: OUT OF CONTEXT - Response is irrelevant, off-topic, or unrelated to the question asked
-- 2-4: INCORRECT - Response attempts to answer but contains wrong information or misunderstanding
-- 5-7: PARTIALLY CORRECT - Response shows understanding but is incomplete, missing key points, or lacks depth
-- 8-10: CORRECT - Response is accurate, complete, relevant, and demonstrates good understanding
-
+- 0-2: OUT OF CONTEXT - Response is irrelevant, off-topic, unrelated to the question asked, or response explicitly says "I don't know" or related keywords
+- 3-5: INCORRECT - Response attempts to answer but contains wrong information or misunderstanding
+- 6-8: PARTIALLY CORRECT - Response shows understanding but is incomplete, missing key points, or lacks depth
+- 9-10: CORRECT - Response is accurate, complete, relevant, and demonstrates good understanding
+ 
 SCORING GUIDELINES:
 - Evaluate each response based on RELEVANCE and CORRECTNESS
+- 0-1: when the candidate explicitly says "I don't know", "I'm not sure", or admits they cannot answer the question. These responses show no attempt to engage with the content.
 - 0-2: Use when the candidate talks about something completely unrelated to the question
-- 2-4: Use when the candidate tries to answer but gets facts wrong or shows misconceptions
-- 5-7: Use when the candidate is on the right track but missing important details or only partially addresses the question
-- 8-10: Use when the candidate provides a complete, accurate, and well-articulated answer
+- 3-5: Use when the candidate tries to answer but gets facts wrong or shows misconceptions
+- 6-9: Use when the candidate is on the right track but missing important details or only partially addresses the question
+- 9-10: Use when the candidate provides a complete, accurate, and well-articulated answer
 - This is PRACTICE, so provide constructive feedback to help candidates improve
 - In detailed_feedback, explain what was missing or incorrect and what a better answer would include
+ 
 
 Return ONLY the JSON object, no additional text."""
 
@@ -922,7 +905,7 @@ Return ONLY the JSON object, no additional text."""
         
         # Generate evaluation using OpenAI
         response = openai.chat.completions.create(
-            model="gpt-4o",  # Using GPT-4 for better evaluation quality
+            model="gpt-4.1-mini",
             messages=[
                 {"role": "system", "content": evaluation_prompt},
                 {"role": "user", "content": f"Here is the complete interview conversation:\n\n{conversation_text}"}
