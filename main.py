@@ -905,6 +905,7 @@ SCORING SCALE (0-10):
 
 SCORING GUIDELINES:
 - Evaluate each response based on RELEVANCE and CORRECTNESS
+- 1 when the candidate explicitly says "I don't know", "I'm not sure", or admits they cannot answer the question. These responses show no attempt to engage with the content.
 - 0-2: Use when the candidate talks about something completely unrelated to the question
 - 2-4: Use when the candidate tries to answer but gets facts wrong or shows misconceptions
 - 5-7: Use when the candidate is on the right track but missing important details or only partially addresses the question
