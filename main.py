@@ -10,18 +10,36 @@ from fastapi.responses import FileResponse, HTMLResponse
 from pydantic import BaseModel, EmailStr
 from typing import List, Dict, Literal
 import openai
+from fastapi import Query
 import requests
 import os
 from dotenv import load_dotenv
 import logging
 import json
+from log_handler import log_capture, setup_log_capture
+from datetime import datetime
 from typing import Optional
+from typing import Optional
+from scoring_rubrics import (
+    get_rubric_for_category, 
+    calculate_weighted_score, 
+    format_rubric_for_prompt,
+    ScoringCriteria
+)
+
 # Load environment variables
 load_dotenv()
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Setup log capture for live viewing
+setup_log_capture(logger)
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -302,6 +320,32 @@ Guidelines:
 }
 
 # Pydantic Models
+
+# Add these new models for turn-by-turn scoring
+class TurnScore(BaseModel):
+    """Score for a single turn (question-answer pair)"""
+    turn_number: int
+    question: str
+    answer: str
+    category: str
+    criterion_scores: Dict[str, float]  # criterion_name -> score (0-10)
+    overall_turn_score: float  # Weighted average of criterion scores
+    feedback: str  # Specific feedback for this turn
+    strengths: List[str]  # What was good in this response
+    improvements: List[str]  # What could be better
+
+class TurnEvaluationRequest(BaseModel):
+    """Request to evaluate a single turn"""
+    interview_type: str
+    category: str
+    question: str
+    answer: str
+    turn_number: int
+
+class TurnEvaluationResponse(BaseModel):
+    """Response containing turn evaluation"""
+    turn_score: TurnScore
+
 class InterviewStartRequest(BaseModel):
     interview_type: Literal["dentist", "hygienist"]
     user_name: str
@@ -787,6 +831,150 @@ async def generate_audio(text: str):
         logger.error(f"Error generating audio: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error generating audio: {str(e)}")
 
+@app.post("/api/interview/evaluate-turn", response_model=TurnEvaluationResponse)
+async def evaluate_turn(request: TurnEvaluationRequest):
+    """
+    Evaluate a single turn (question-answer pair) immediately after the candidate answers
+    Uses structured rubrics for consistent, objective scoring
+    """
+    try:
+        logger.info(f"\n📊 EVALUATING TURN {request.turn_number}")
+        # Check if answer is empty, blank, or too short (no meaningful content)
+        answer_stripped = request.answer.strip()
+        
+        if not answer_stripped or len(answer_stripped) < 5:
+            logger.info("⚠️ Empty or very short answer detected - scoring as 0")
+            
+            # Get rubric to know which criteria to score
+            rubric = get_rubric_for_category(request.category)
+            
+            # Create zero scores for all criteria
+            zero_scores = {criterion.name: 0.0 for criterion in rubric.criteria}
+            
+            # Return immediate zero score
+            return TurnEvaluationResponse(
+                turn_score=TurnScore(
+                    turn_number=request.turn_number,
+                    question=request.question,
+                    answer=request.answer,
+                    category=request.category,
+                    criterion_scores=zero_scores,
+                    overall_turn_score=0.0,
+                    feedback="No meaningful response provided. Please ensure you speak clearly into the microphone.",
+                    strengths=[],
+                    improvements=["Provide a verbal response to the question", "Speak clearly and ensure microphone is working"]
+                )
+            )
+        logger.info(f"📁 Category: {request.category}")
+        logger.info(f"❓ Question: {request.question[:100]}...")
+        logger.info(f"💬 Answer: {request.answer[:100]}...")
+        logger.info("="*80)
+        
+        # Get the appropriate rubric for this category
+        rubric = get_rubric_for_category(request.category)
+        rubric_text = format_rubric_for_prompt(rubric)
+        
+        # Create evaluation prompt with structured rubric
+        evaluation_prompt = f"""You are an expert dental interview evaluator. You must evaluate a candidate's response using the provided rubric.
+
+{rubric_text}
+
+CRITICAL INSTRUCTIONS:
+1. Score each criterion independently based on the scoring guide
+2. Provide a score (0-10) for EACH criterion listed in the rubric
+3. Be objective and reference specific parts of the candidate's answer
+4. Identify 1-2 strengths and 1-2 areas for improvement
+5. Keep feedback constructive and specific
+6. IF THE ANSWER IS BLANK, EMPTY, OR JUST SILENCE, SCORE ALL CRITERIA AS 0
+
+Return your evaluation in this EXACT JSON format:
+{{
+    "criterion_scores": {{
+        "<criterion_1_name>": <score_0_to_10>,
+        "<criterion_2_name>": <score_0_to_10>,
+        "<criterion_3_name>": <score_0_to_10>
+    }},
+    "feedback": "<2-3 sentences explaining the scores, referencing specific parts of the answer>",
+    "strengths": ["<specific strength 1>", "<specific strength 2>"],
+    "improvements": ["<specific improvement 1>", "<specific improvement 2>"]
+}}
+
+IMPORTANT: 
+- Use the EXACT criterion names from the rubric above
+- Each score must be a number between 0 and 10
+- Be honest but constructive
+- If the answer is "I don't know" or completely off-topic, score Relevance as 0-2
+"""
+
+        # Format the question and answer for evaluation
+        turn_text = f"""QUESTION: {request.question}
+
+CANDIDATE'S ANSWER: {request.answer}
+
+Now evaluate this answer using the rubric provided."""
+
+        # Generate evaluation using OpenAI
+        response = openai.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": evaluation_prompt},
+                {"role": "user", "content": turn_text}
+            ],
+            temperature=0.3,  # Lower temperature for more consistent scoring
+            max_tokens=800,
+            response_format={"type": "json_object"}
+        )
+        
+        # Parse the JSON response
+        evaluation_data = json.loads(response.choices[0].message.content)
+        
+        # Calculate weighted overall score
+        criterion_scores = evaluation_data.get("criterion_scores", {})
+        overall_score = calculate_weighted_score(criterion_scores, rubric.criteria)
+        
+        # Create the turn score object
+        turn_score = TurnScore(
+            turn_number=request.turn_number,
+            question=request.question,
+            answer=request.answer,
+            category=request.category,
+            criterion_scores=criterion_scores,
+            overall_turn_score=overall_score,
+            feedback=evaluation_data.get("feedback", "No feedback provided"),
+            strengths=evaluation_data.get("strengths", []),
+            improvements=evaluation_data.get("improvements", [])
+        )
+        
+        logger.info(f"✅ Turn {request.turn_number} evaluated")
+        logger.info(f"Overall Turn Score: {overall_score}/10")
+        logger.info(f"Criterion Scores: {criterion_scores}")
+        logger.info("-"*80)
+        
+        return TurnEvaluationResponse(turn_score=turn_score)
+        
+    except json.JSONDecodeError as e:
+        logger.error(f"❌ Error parsing turn evaluation JSON: {str(e)}")
+        # Fallback response
+        rubric = get_rubric_for_category(request.category)
+        fallback_scores = {c.name: 5.0 for c in rubric.criteria}
+        
+        return TurnEvaluationResponse(
+            turn_score=TurnScore(
+                turn_number=request.turn_number,
+                question=request.question,
+                answer=request.answer,
+                category=request.category,
+                criterion_scores=fallback_scores,
+                overall_turn_score=5.0,
+                feedback="Response received and recorded. Continue to the next question.",
+                strengths=["Provided an answer"],
+                improvements=["Could provide more detail"]
+            )
+        )
+    except Exception as e:
+        logger.error(f"❌ Error evaluating turn: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error evaluating turn: {str(e)}")
+
 @app.post("/api/audio/transcribe")
 async def transcribe_audio(file: UploadFile = File(...)):
     """
@@ -832,7 +1020,7 @@ async def evaluate_interview(request: InterviewEvaluationRequest):
         logger.info(f"📝 Conversation length: {len(request.conversation_history)} messages")
         logger.info("="*80)
         
-        # Create evaluation prompt
+        # Create evaluation prompt that leverages turn-by-turn scores if available
         evaluation_prompt = f"""You are an expert interviewer and career coach specializing in dental positions. 
 You have just completed an interview with {request.user_name} for a {request.interview_type} position.
 
@@ -840,6 +1028,20 @@ Review the entire interview conversation and provide a comprehensive, profession
 
 Interview Categories (in order):
 {', '.join([f"{i+1}. {cat}" for i, cat in enumerate(INTERVIEW_CATEGORIES)])}
+
+EVALUATION APPROACH:
+- Consider the quality, depth, and professionalism of responses across all categories
+- Look for patterns of strength and areas needing development
+- Be specific and reference actual responses from the interview
+- Balance encouragement with constructive feedback
+- Consider both technical knowledge AND communication skills
+
+SCORING GUIDELINES (0-10 scale):
+- 9-10: Excellent - Comprehensive, accurate, professional responses throughout
+- 7-8: Good - Strong performance with minor areas for improvement
+- 5-6: Satisfactory - Adequate responses but significant room for growth
+- 2-4: Needs Improvement - Multiple gaps in knowledge or communication
+- 0-1: Poor - Significant deficiencies or inability to answer most questions
 
 Provide your evaluation in the following JSON format:
 {{
@@ -866,34 +1068,11 @@ Provide your evaluation in the following JSON format:
         "<specific area 2>",
         "<specific area 3>"
     ],
-    "detailed_feedback": "<2-3 paragraphs of detailed, constructive feedback covering their overall performance, notable responses, and how they presented themselves>",
+    "detailed_feedback": "<2-3 paragraphs of detailed, constructive feedback covering their overall performance, communication style, technical knowledge, and professionalism>",
     "summary": "<1-2 sentences summarizing their interview performance and readiness for the role>"
 }}
 
-Guidelines for evaluation:
-- Be specific and reference actual responses from the interview
-- Balance positive feedback with constructive criticism
-- Consider the context of a {request.interview_type} position
-- Evaluate communication skills, technical knowledge, professionalism, and cultural fit
-- Provide actionable suggestions for improvement
-- Be encouraging while maintaining professional standards
 
-SCORING SCALE (0-10):
-- 0-2: OUT OF CONTEXT - Response is irrelevant, off-topic, unrelated to the question asked, or response explicitly says "I don't know" or related keywords
-- 3-5: INCORRECT - Response attempts to answer but contains wrong information or misunderstanding
-- 6-8: PARTIALLY CORRECT - Response shows understanding but is incomplete, missing key points, or lacks depth
-- 9-10: CORRECT - Response is accurate, complete, relevant, and demonstrates good understanding
- 
-SCORING GUIDELINES:
-- Evaluate each response based on RELEVANCE and CORRECTNESS
-- 0-1: when the candidate explicitly says "I don't know", "I'm not sure", or admits they cannot answer the question. These responses show no attempt to engage with the content.
-- 0-2: Use when the candidate talks about something completely unrelated to the question
-- 3-5: Use when the candidate tries to answer but gets facts wrong or shows misconceptions
-- 6-9: Use when the candidate is on the right track but missing important details or only partially addresses the question
-- 9-10: Use when the candidate provides a complete, accurate, and well-articulated answer
-- This is PRACTICE, so provide constructive feedback to help candidates improve
-- In detailed_feedback, explain what was missing or incorrect and what a better answer would include
- 
 
 Return ONLY the JSON object, no additional text."""
 
@@ -957,6 +1136,83 @@ async def get_interview_types():
             "hygienist": "Interview practice for dental hygienist positions focusing on preventive care and patient education"
         }
     }
+
+# ===== LOG VIEWER ENDPOINTS =====
+
+@app.get("/logs", response_class=HTMLResponse)
+async def serve_logs_page():
+    """Serve the log viewer HTML page"""
+    import os
+    logs_html_path = os.path.join(os.path.dirname(__file__), "logs.html")
+    
+    if os.path.exists(logs_html_path):
+        with open(logs_html_path, 'r', encoding='utf-8') as f:  # ← This fixes it!
+            return HTMLResponse(content=f.read())
+    else:
+        return HTMLResponse(
+            content="<h1>Log viewer not found</h1><p>Please ensure logs.html exists</p>",
+            status_code=404
+        )
+
+@app.get("/api/logs")
+async def get_logs(
+    limit: Optional[int] = Query(100, ge=1, le=1000),
+    level: Optional[str] = Query(None),
+    since: Optional[str] = Query(None)
+):
+    """Get application logs with optional filtering"""
+    try:
+        since_dt = None
+        if since:
+            since_dt = datetime.fromisoformat(since)
+        
+        logs = log_capture.get_logs(limit=limit, level=level, since=since_dt)
+        
+        return {
+            "success": True,
+            "count": len(logs),
+            "logs": logs
+        }
+    except Exception as e:
+        logger.error(f"Error fetching logs: {str(e)}")
+        return {
+            "success": False,
+            "error": str(e),
+            "logs": []
+        }
+
+@app.get("/api/logs/stats")
+async def get_log_stats():
+    """Get statistics about application logs"""
+    try:
+        stats = log_capture.get_stats()
+        return {
+            "success": True,
+            "stats": stats
+        }
+    except Exception as e:
+        logger.error(f"Error fetching log stats: {str(e)}")
+        return {
+            "success": False,
+            "error": str(e)
+        }
+
+@app.delete("/api/logs")
+async def clear_logs():
+    """Clear all captured logs"""
+    try:
+        log_capture.clear()
+        logger.info("Logs cleared via API")
+        return {
+            "success": True,
+            "message": "All logs cleared successfully"
+        }
+    except Exception as e:
+        logger.error(f"Error clearing logs: {str(e)}")
+        return {
+            "success": False,
+            "error": str(e)
+        }    
 
 if __name__ == "__main__":
     import uvicorn
