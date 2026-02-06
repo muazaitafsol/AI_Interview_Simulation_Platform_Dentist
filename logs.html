@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dental Interview API - Live Logs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-icon {
+            font-size: 32px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .controls {
+            background: #f8fafc;
+            padding: 20px 30px;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-group label {
+            font-weight: 500;
+            color: #475569;
+            font-size: 14px;
+        }
+
+        select, input[type="number"] {
+            padding: 8px 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #64748b;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #475569;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px 30px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-card.info {
+            border-color: #3b82f6;
+        }
+
+        .stat-card.warning {
+            border-color: #f59e0b;
+        }
+
+        .stat-card.error {
+            border-color: #ef4444;
+        }
+
+        .stat-card.success {
+            border-color: #10b981;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .log-container {
+            padding: 30px;
+            background: #0f172a;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .log-container::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .log-container::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        .log-container::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 5px;
+        }
+
+        .log-container::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        .log-entry {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            border-left: 4px solid;
+            display: flex;
+            gap: 15px;
+            animation: slideIn 0.3s ease-out;
+            transition: all 0.2s;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .log-entry:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .log-entry.INFO {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #3b82f6;
+            color: #93c5fd;
+        }
+
+        .log-entry.WARNING {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: #f59e0b;
+            color: #fbbf24;
+        }
+
+        .log-entry.ERROR {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: #ef4444;
+            color: #fca5a5;
+        }
+
+        .log-entry.SUCCESS {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+            color: #6ee7b7;
+        }
+
+        .log-timestamp {
+            color: #94a3b8;
+            flex-shrink: 0;
+            font-weight: 600;
+        }
+
+        .log-level {
+            flex-shrink: 0;
+            font-weight: 700;
+            min-width: 60px;
+        }
+
+        .log-message {
+            flex-grow: 1;
+            word-break: break-word;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #94a3b8;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+        }
+
+        .footer {
+            background: #f8fafc;
+            padding: 20px 30px;
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .chip.active {
+            border-color: currentColor;
+            transform: scale(1.05);
+        }
+
+        .chip.info {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .chip.warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: #f59e0b;
+        }
+
+        .chip.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+
+        .chip.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .control-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>
+                <span class="header-icon">🦷</span>
+                Dental Interview API - Live Logs
+            </h1>
+            <div class="status-badge">
+                <div class="status-indicator"></div>
+                <span id="statusText">Auto-refreshing</span>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <div class="control-group">
+                <label for="refreshInterval">Refresh Interval:</label>
+                <select id="refreshInterval">
+                    <option value="1000">1 second</option>
+                    <option value="2000" selected>2 seconds</option>
+                    <option value="5000">5 seconds</option>
+                    <option value="10000">10 seconds</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="maxLogs">Max Logs:</label>
+                <input type="number" id="maxLogs" value="100" min="10" max="1000" step="10">
+            </div>
+
+            <button class="btn btn-primary" id="toggleAutoRefresh">
+                <span class="loading" id="loadingSpinner"></span>
+                Pause
+            </button>
+
+            <button class="btn btn-secondary" id="refreshNow">
+                🔄 Refresh Now
+            </button>
+
+            <button class="btn btn-danger" id="clearLogs">
+                🗑️ Clear Logs
+            </button>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="controls">
+            <label style="font-weight: 600; color: #475569;">Filter by Level:</label>
+            <div class="filter-chips">
+                <div class="chip info active" data-level="INFO">ℹ️ INFO</div>
+                <div class="chip warning active" data-level="WARNING">⚠️ WARNING</div>
+                <div class="chip error active" data-level="ERROR">❌ ERROR</div>
+                <div class="chip success active" data-level="SUCCESS">✅ SUCCESS</div>
+            </div>
+        </div>
+
+        <!-- Statistics -->
+        <div class="stats">
+            <div class="stat-card info">
+                <div class="stat-label">Total Logs</div>
+                <div class="stat-value" id="totalLogs">0</div>
+            </div>
+            <div class="stat-card info">
+                <div class="stat-label">Info</div>
+                <div class="stat-value" id="infoCount">0</div>
+            </div>
+            <div class="stat-card warning">
+                <div class="stat-label">Warnings</div>
+                <div class="stat-value" id="warningCount">0</div>
+            </div>
+            <div class="stat-card error">
+                <div class="stat-label">Errors</div>
+                <div class="stat-value" id="errorCount">0</div>
+            </div>
+        </div>
+
+        <!-- Log Container -->
+        <div class="log-container" id="logContainer">
+            <div class="empty-state">
+                <div class="empty-state-icon">📋</div>
+                <h3>No logs yet</h3>
+                <p>Logs will appear here as the API processes requests</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Last updated: <span id="lastUpdate">Never</span> | 
+            Auto-scroll: <span id="autoScrollStatus">Enabled</span></p>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        let autoRefresh = true;
+        let refreshInterval = 2000;
+        let maxLogs = 100;
+        let logs = [];
+        let activeFilters = new Set(['INFO', 'WARNING', 'ERROR', 'SUCCESS']);
+        let autoScroll = true;
+        let refreshTimer = null;
+
+        // Elements
+        const logContainer = document.getElementById('logContainer');
+        const statusText = document.getElementById('statusText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const totalLogsEl = document.getElementById('totalLogs');
+        const infoCountEl = document.getElementById('infoCount');
+        const warningCountEl = document.getElementById('warningCount');
+        const errorCountEl = document.getElementById('errorCount');
+        const lastUpdateEl = document.getElementById('lastUpdate');
+        const autoScrollStatusEl = document.getElementById('autoScrollStatus');
+
+        // Initialize
+        function init() {
+            setupEventListeners();
+            startAutoRefresh();
+            // Initial load
+            fetchLogs();
+        }
+
+        function setupEventListeners() {
+            // Toggle auto-refresh
+            document.getElementById('toggleAutoRefresh').addEventListener('click', () => {
+                autoRefresh = !autoRefresh;
+                const btn = document.getElementById('toggleAutoRefresh');
+                if (autoRefresh) {
+                    btn.innerHTML = '<span class="loading" id="loadingSpinner"></span> Pause';
+                    startAutoRefresh();
+                    statusText.textContent = 'Auto-refreshing';
+                } else {
+                    btn.innerHTML = '▶️ Resume';
+                    stopAutoRefresh();
+                    statusText.textContent = 'Paused';
+                }
+            });
+
+            // Refresh now
+            document.getElementById('refreshNow').addEventListener('click', fetchLogs);
+
+            // Clear logs
+            document.getElementById('clearLogs').addEventListener('click', async () => {
+                try {
+                    const response = await fetch('/api/logs', { method: 'DELETE' });
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        logs = [];
+                        renderLogs();
+                        updateStats();
+                    }
+                } catch (error) {
+                    console.error('Error clearing logs:', error);
+                }
+            });
+
+            // Refresh interval change
+            document.getElementById('refreshInterval').addEventListener('change', (e) => {
+                refreshInterval = parseInt(e.target.value);
+                if (autoRefresh) {
+                    stopAutoRefresh();
+                    startAutoRefresh();
+                }
+            });
+
+            // Max logs change
+            document.getElementById('maxLogs').addEventListener('change', (e) => {
+                maxLogs = parseInt(e.target.value);
+                if (logs.length > maxLogs) {
+                    logs = logs.slice(-maxLogs);
+                    renderLogs();
+                }
+            });
+
+            // Filter chips
+            document.querySelectorAll('.chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    const level = chip.dataset.level;
+                    chip.classList.toggle('active');
+                    
+                    if (activeFilters.has(level)) {
+                        activeFilters.delete(level);
+                    } else {
+                        activeFilters.add(level);
+                    }
+                    
+                    renderLogs();
+                });
+            });
+
+            // Auto-scroll detection
+            logContainer.addEventListener('scroll', () => {
+                const isAtBottom = logContainer.scrollHeight - logContainer.scrollTop <= logContainer.clientHeight + 50;
+                autoScroll = isAtBottom;
+                autoScrollStatusEl.textContent = autoScroll ? 'Enabled' : 'Disabled';
+            });
+        }
+
+        function startAutoRefresh() {
+            refreshTimer = setInterval(fetchLogs, refreshInterval);
+        }
+
+        function stopAutoRefresh() {
+            if (refreshTimer) {
+                clearInterval(refreshTimer);
+                refreshTimer = null;
+            }
+        }
+
+        // Fetch logs from the API
+        async function fetchLogs() {
+            try {
+                const params = new URLSearchParams({
+                    limit: maxLogs
+                });
+
+                const response = await fetch(`/api/logs?${params}`);
+                const data = await response.json();
+
+                if (data.success && data.logs) {
+                    logs = data.logs;
+                    renderLogs();
+                    updateStats();
+                }
+
+                // Update timestamp
+                lastUpdateEl.textContent = new Date().toLocaleTimeString();
+
+                // Also fetch stats
+                fetchStats();
+            } catch (error) {
+                console.error('Error fetching logs:', error);
+                statusText.textContent = 'Error fetching logs';
+            }
+        }
+
+        // Fetch statistics from API
+        async function fetchStats() {
+            try {
+                const response = await fetch('/api/logs/stats');
+                const data = await response.json();
+
+                if (data.success && data.stats) {
+                    totalLogsEl.textContent = data.stats.total;
+                    infoCountEl.textContent = data.stats.by_level.INFO || 0;
+                    warningCountEl.textContent = data.stats.by_level.WARNING || 0;
+                    errorCountEl.textContent = data.stats.by_level.ERROR || 0;
+                }
+            } catch (error) {
+                console.error('Error fetching stats:', error);
+            }
+        }
+
+        function renderLogs() {
+            const filteredLogs = logs.filter(log => activeFilters.has(log.level));
+            
+            if (filteredLogs.length === 0) {
+                logContainer.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📋</div>
+                        <h3>No logs to display</h3>
+                        <p>Adjust filters or wait for new logs</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const wasAtBottom = autoScroll;
+
+            logContainer.innerHTML = filteredLogs.map(log => {
+                const timestamp = new Date(log.timestamp).toLocaleTimeString();
+                return `
+                    <div class="log-entry ${log.level}">
+                        <span class="log-timestamp">${timestamp}</span>
+                        <span class="log-level">${log.level}</span>
+                        <span class="log-message">${log.message}</span>
+                    </div>
+                `;
+            }).join('');
+
+            // Auto-scroll to bottom if user was at bottom
+            if (wasAtBottom) {
+                logContainer.scrollTop = logContainer.scrollHeight;
+            }
+        }
+
+        function updateStats() {
+            totalLogsEl.textContent = logs.length;
+            infoCountEl.textContent = logs.filter(l => l.level === 'INFO').length;
+            warningCountEl.textContent = logs.filter(l => l.level === 'WARNING').length;
+            errorCountEl.textContent = logs.filter(l => l.level === 'ERROR').length;
+        }
+
+        // Initialize on page load
+        init();
+    </script>
+</body>
+</html>
